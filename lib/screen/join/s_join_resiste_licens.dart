@@ -44,6 +44,7 @@ class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
                   color: AppColors.grey,
                 )),
           ),
+          height30,
           DefaultButtonWidget(title: "회원가입", callback: () {
             
           })

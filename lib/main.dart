@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fast_app_base/screen/login/s_login.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ void main() async {
       path: 'assets/translations',
       useOnlyLangCode: true,
       child: const GetMaterialApp(
-        home: App(),
+        home: LoginScreen(),//App(),
         debugShowCheckedModeBanner: false,
       )));
 }

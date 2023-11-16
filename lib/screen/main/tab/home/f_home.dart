@@ -20,14 +20,14 @@ class HomeFragment extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
+          /*Row(
             children: [
               IconButton(
                 onPressed: () => openDrawer(context),
                 icon: const Icon(Icons.menu),
               )
             ],
-          ),
+          ),*/
           const EmptyExpanded(),
           RoundButton(
             text: 'Snackbar 보이기',

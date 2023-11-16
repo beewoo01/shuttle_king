@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:fast_app_base/app.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/dart/extension/num_duration_extension.dart';
-import 'package:fast_app_base/common/util/async/flutter_async.dart';
 import 'package:fast_app_base/common/util/e_user_type.dart';
 import 'package:fast_app_base/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:fast_app_base/common/widget/util/w_default_button.dart';
@@ -53,7 +52,10 @@ class _LoginScreenState extends State<LoginScreen>
             height10,
             DefaultButtonWidget(
               title: "로그인",
-              callback: () {},
+              callback: () {
+                Get.to( const App());
+                    //const MainScreen());
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -4,8 +4,10 @@ import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
 import 'package:flutter/material.dart';
 
 enum TabItem {
-  home(Icons.home, '홈', HomeFragment()),
-  favorite(Icons.star, '즐겨찾기', FavoriteFragment(isShowBackButton: false));
+  home(Icons.home_filled, '홈', HomeFragment()),
+  lineSearch(Icons.search, '노선검색', FavoriteFragment(isShowBackButton: false)),
+  news(Icons.notifications, '뉴스', HomeFragment()),
+  myInfo(Icons.person_3_rounded, '내 정보', HomeFragment());
 
   final IconData activeIcon;
   final IconData inActiveIcon;

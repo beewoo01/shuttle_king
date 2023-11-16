@@ -47,8 +47,9 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
             locale: context.locale,
             title: 'Image Finder',
             theme: context.themeType.themeData,
-            home: const LoginScreen()
-            //const MainScreen(),
+            home:
+            //const LoginScreen()
+            const MainScreen(),
             );
       }),
     );
