@@ -10,10 +10,12 @@ import 'common/data/preference/app_preferences.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  //await _initialize();
   await NaverMapSdk.instance.initialize(
       clientId: '7ur5iq5wx6',
       onAuthFailed: (error) {
-        print('NaverMapSDK Error Auth failed: $error');
+        debugPrint('NaverMapSDK Error Auth failed: $error');
+        //print('NaverMapSDK Error Auth failed: $error');
       });
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
