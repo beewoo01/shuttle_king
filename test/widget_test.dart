@@ -7,11 +7,11 @@
 
 import 'dart:io';
 
-import 'package:fast_app_base/app.dart';
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/data/preference/app_preferences.dart';
-import 'package:fast_app_base/common/language/language.dart';
-import 'package:fast_app_base/common/theme/custom_theme.dart';
+import 'package:shuttle_king/app.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/data/preference/app_preferences.dart';
+import 'package:shuttle_king/common/language/language.dart';
+import 'package:shuttle_king/common/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:isar/isar.dart';

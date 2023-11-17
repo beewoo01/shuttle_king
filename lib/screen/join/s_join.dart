@@ -1,9 +1,9 @@
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/util/e_user_type.dart';
-import 'package:fast_app_base/common/widget/util/a_app_bar.dart';
-import 'package:fast_app_base/common/widget/util/d_textfield_inputdecoration.dart';
-import 'package:fast_app_base/common/widget/util/w_default_button.dart';
-import 'package:fast_app_base/screen/join/s_join_resiste_licens.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/util/e_user_type.dart';
+import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
+import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
+import 'package:shuttle_king/common/widget/util/w_default_button.dart';
+import 'package:shuttle_king/screen/join/s_join_resiste_licens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -18,9 +18,9 @@ class JoinScreen extends StatefulWidget {
 }
 
 class _JoinScreenState extends State<JoinScreen> {
-  double get defaultTextSize => 18;
+  //double get defaultTextSize => 18;
 
-  double get defaultPaddingHorizontalSize => 29;
+  //double get defaultPaddingHorizontalSize => 29;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _JoinScreenState extends State<JoinScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             height30,
-            "아이디".text.black.size(defaultTextSize).bold.make(),
+            "아이디".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
             height10,
             TextField(
               keyboardType: TextInputType.emailAddress,
@@ -42,7 +42,7 @@ class _JoinScreenState extends State<JoinScreen> {
                   .getDefaultInputDecoration("아이디를 입력해 주세요."),
             ),
             height20,
-            "비밀번호".text.black.size(defaultTextSize).bold.make(),
+            "비밀번호".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
             height10,
             TextField(
               obscureText: true,
@@ -51,7 +51,7 @@ class _JoinScreenState extends State<JoinScreen> {
                   .getDefaultInputDecoration("비밀번호를 입력해 주세요."),
             ),
             height20,
-            "비밀번호 확인".text.black.size(defaultTextSize).bold.make(),
+            "비밀번호 확인".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
             height10,
             TextField(
               obscureText: true,
@@ -60,7 +60,7 @@ class _JoinScreenState extends State<JoinScreen> {
                   .getDefaultInputDecoration("비밀번호를 입력해 주세요."),
             ),
             height20,
-            "이름".text.black.size(defaultTextSize).bold.make(),
+            "이름".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
             height10,
             TextField(
               keyboardType: TextInputType.name,
@@ -68,7 +68,7 @@ class _JoinScreenState extends State<JoinScreen> {
                   .getDefaultInputDecoration("이름을 입력해 주세요."),
             ),
             height20,
-            "이메일".text.black.size(defaultTextSize).bold.make(),
+            "이메일".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
             height10,
             TextField(
               keyboardType: TextInputType.emailAddress,
@@ -76,7 +76,7 @@ class _JoinScreenState extends State<JoinScreen> {
                   .getDefaultInputDecoration("이메일을 입력해 주세요."),
             ),
             height20,
-            "전화번호".text.black.size(defaultTextSize).bold.make(),
+            "전화번호".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
             height10,
             TextField(
               keyboardType: TextInputType.number,
@@ -93,7 +93,7 @@ class _JoinScreenState extends State<JoinScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     height20,
-                    "차량종류".text.black.size(defaultTextSize).bold.make(),
+                    "차량종류".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
                     height10,
                     TextField(
                       keyboardType: TextInputType.text,
@@ -102,7 +102,7 @@ class _JoinScreenState extends State<JoinScreen> {
                     ),
 
                     height20,
-                    "차량번호".text.black.size(defaultTextSize).bold.make(),
+                    "차량번호".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
                     height10,
                     TextField(
                       keyboardType: TextInputType.text,
@@ -111,7 +111,7 @@ class _JoinScreenState extends State<JoinScreen> {
                     ),
 
                     height20,
-                    "계좌번호".text.black.size(defaultTextSize).bold.make(),
+                    "계좌번호".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
                     height10,
                     TextField(
                       keyboardType: TextInputType.number,
@@ -124,7 +124,7 @@ class _JoinScreenState extends State<JoinScreen> {
 
 
                     height20,
-                    "은행명".text.black.size(defaultTextSize).bold.make(),
+                    "은행명".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
                     height10,
                     TextField(
                       keyboardType: TextInputType.number,
@@ -150,7 +150,7 @@ class _JoinScreenState extends State<JoinScreen> {
             height30,
 
           ],
-        ).pSymmetric(h: defaultPaddingHorizontalSize),
+        ).pSymmetric(h: AppSizes.defaultPaddingHorizontalSize),
       ),
     );
   }

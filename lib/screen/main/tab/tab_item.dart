@@ -1,11 +1,12 @@
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/main/tab/favorite/f_favorite.dart';
-import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/screen/main/tab/favorite/f_favorite.dart';
+import 'package:shuttle_king/screen/main/tab/home/f_home.dart';
+import 'package:shuttle_king/screen/main/tab/serch/f_search.dart';
 import 'package:flutter/material.dart';
 
 enum TabItem {
   home(Icons.home_filled, '홈', HomeFragment()),
-  lineSearch(Icons.search, '노선검색', FavoriteFragment(isShowBackButton: false)),
+  lineSearch(Icons.search, '노선검색', Search()),
   news(Icons.notifications, '뉴스', HomeFragment()),
   myInfo(Icons.person_3_rounded, '내 정보', HomeFragment());
 
@@ -23,7 +24,7 @@ enum TabItem {
           key: ValueKey(tabName),
           isActivated ? activeIcon : inActiveIcon,
           color:
-              isActivated ? context.appColors.iconButton : context.appColors.iconButtonInactivate,
+              isActivated ? context.appColors.selectedColor : context.appColors.iconButtonInactivate,
         ),
         label: tabName);
   }

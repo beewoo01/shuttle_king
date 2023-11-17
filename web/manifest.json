@@ -1,6 +1,6 @@
 {
-    "name": "fast_app_base",
-    "short_name": "fast_app_base",
+    "name": "shuttle_king",
+    "short_name": "shuttle_king",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

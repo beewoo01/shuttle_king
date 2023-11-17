@@ -1,5 +1,5 @@
-import 'package:fast_app_base/screen/main/tab/tab_item.dart';
-import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
+import 'package:shuttle_king/screen/main/tab/tab_item.dart';
+import 'package:shuttle_king/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/common.dart';
@@ -87,7 +87,7 @@ class MainScreenState extends State<MainScreen> {
       child: BottomNavigationBar(
         items: navigationBarItems(context),
         currentIndex: _currentIndex,
-        selectedItemColor: context.appColors.text,
+        selectedItemColor: context.appColors.selectedColor,
         unselectedItemColor: context.appColors.iconButtonInactivate,
         onTap: _handleOnTapNavigationBarItem,
         showSelectedLabels: true,
@@ -144,6 +144,7 @@ class MainScreenState extends State<MainScreen> {
         navigationKey.currentState!.pop();
       }
     }
+
   }
 
   void initNavigatorKeys() {

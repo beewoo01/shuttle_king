@@ -1,7 +1,7 @@
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/theme/custom_theme_app.dart';
-import 'package:fast_app_base/screen/login/s_login.dart';
-import 'package:fast_app_base/screen/main/s_main.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/theme/custom_theme_app.dart';
+import 'package:shuttle_king/screen/login/s_login.dart';
+import 'package:shuttle_king/screen/main/s_main.dart';
 import 'package:flutter/material.dart';
 
 import 'common/theme/custom_theme.dart';

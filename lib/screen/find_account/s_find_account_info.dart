@@ -1,10 +1,10 @@
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/util/a_app_bar.dart';
-import 'package:fast_app_base/common/widget/util/d_textfield_inputdecoration.dart';
-import 'package:fast_app_base/common/widget/util/w_default_button.dart';
-import 'package:fast_app_base/screen/find_account/vm_find_account_info.dart';
-import 'package:fast_app_base/screen/find_account/w_find_id.dart';
-import 'package:fast_app_base/screen/find_account/w_find_pw.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
+import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
+import 'package:shuttle_king/common/widget/util/w_default_button.dart';
+import 'package:shuttle_king/screen/find_account/vm_find_account_info.dart';
+import 'package:shuttle_king/screen/find_account/w_find_id.dart';
+import 'package:shuttle_king/screen/find_account/w_find_pw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -18,10 +18,6 @@ class FindAccountInfoScreen extends StatefulWidget {
 
 class _FindAccountInfoScreenState extends State<FindAccountInfoScreen> {
   FindAccountViewModel viewModel = Get.put(FindAccountViewModel());
-
-  double get defaultTextSize => 18;
-
-  double get defaultPaddingHorizontalSize => 29;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +82,7 @@ class _FindAccountInfoScreenState extends State<FindAccountInfoScreen> {
           ///////////
           height30,
         ],
-      ).pSymmetric(h: defaultPaddingHorizontalSize),
+      ).pSymmetric(h: AppSizes.defaultPaddingHorizontalSize),
     );
   }
 

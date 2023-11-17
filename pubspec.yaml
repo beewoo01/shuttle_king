@@ -1,4 +1,4 @@
-name: fast_app_base
+name: shuttle_king
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -73,6 +73,10 @@ dependencies:
   freezed: ^2.3.4
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+
+  #naver map
+  #flutter_naver_map: ^1.0.2
+  flutter_naver_map: ^1.0.0-dev.5
 
 dev_dependencies:
   flutter_test:

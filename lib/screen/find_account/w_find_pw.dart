@@ -1,6 +1,6 @@
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/util/d_textfield_inputdecoration.dart';
-import 'package:fast_app_base/common/widget/util/w_default_button.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
+import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

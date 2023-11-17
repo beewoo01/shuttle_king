@@ -1,4 +1,4 @@
-import 'package:fast_app_base/common/constant/app_colors.dart';
+import 'package:shuttle_king/common/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 

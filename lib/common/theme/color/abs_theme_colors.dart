@@ -1,7 +1,7 @@
-import 'package:fast_app_base/common/constant/app_colors.dart';
+import 'package:shuttle_king/common/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 
-export 'package:fast_app_base/common/constant/app_colors.dart';
+export 'package:shuttle_king/common/constant/app_colors.dart';
 
 typedef ColorProvider = Color Function();
 
@@ -18,7 +18,9 @@ abstract class AbstractThemeColors {
 
   Color get iconButton => const Color.fromARGB(255, 0, 0, 0);
 
-  Color get iconButtonInactivate => const Color.fromARGB(255, 162, 162, 162);
+  Color get selectedColor => const Color.fromARGB(255, 82, 166, 114);
+
+  Color get iconButtonInactivate => const Color.fromARGB(255, 187, 187, 187);
 
   Color get inActivate => const Color.fromARGB(255, 200, 207, 220);
 

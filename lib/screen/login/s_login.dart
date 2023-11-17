@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
-import 'package:fast_app_base/app.dart';
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/util/e_user_type.dart';
-import 'package:fast_app_base/common/widget/util/d_textfield_inputdecoration.dart';
-import 'package:fast_app_base/common/widget/util/w_default_button.dart';
-import 'package:fast_app_base/screen/find_account/s_find_account_info.dart';
-import 'package:fast_app_base/screen/join/s_join.dart';
+import 'package:shuttle_king/app.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/util/e_user_type.dart';
+import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
+import 'package:shuttle_king/common/widget/util/w_default_button.dart';
+import 'package:shuttle_king/screen/find_account/s_find_account_info.dart';
+import 'package:shuttle_king/screen/join/s_join.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -21,6 +21,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin, AfterLayoutMixin {
+
+  double get horizontalPaddingSize => 20;
+  double get findAccountTextSize => 14;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,23 +68,23 @@ class _LoginScreenState extends State<LoginScreen>
                     onPressed: () {
                       Get.to(const FindAccountInfoScreen());
                     },
-                    child: "아이디찾기".text.size(14).black.make()),
+                    child: "아이디찾기".text.size(findAccountTextSize).black.make()),
                 "|".text.make(),
                 TextButton(
                     onPressed: () {
                       Get.to(const FindAccountInfoScreen());
                     },
-                    child: "비밀번호찾기".text.size(14).black.make()),
+                    child: "비밀번호찾기".text.size(findAccountTextSize).black.make()),
                 "|".text.make(),
                 TextButton(
                     onPressed: () {
                       Get.to(const JoinScreen(userType: UserType.DRIVER,));
                     },
-                    child: "회원가입".text.size(14).black.make()),
+                    child: "회원가입".text.size(findAccountTextSize).black.make()),
               ],
             )
           ],
-        ).pSymmetric(h: 20),
+        ).pSymmetric(h: horizontalPaddingSize),
       ),
     );
   }

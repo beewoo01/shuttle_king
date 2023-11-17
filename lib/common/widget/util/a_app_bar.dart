@@ -20,7 +20,7 @@ class CustomAppbar extends AppBar {
           .text
           .fontFamily("TmonMonsori")
           .color(AppColors.mainGreenColor)
-          .size(20)
+          .size(AppSizes.appToolbarTitleTextSize)
           .make(),
     );
   }
