@@ -1,41 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:get/get.dart';
 
-import '../tab/serch/detail/vm_line_detail.dart';
-
-class FNMapPage extends StatefulWidget {
-  const FNMapPage({super.key, required this.latitude, required this.longitude});
+class BoardingLocationMapWidget extends StatefulWidget {
+  const BoardingLocationMapWidget(
+      {super.key, required this.latitude, required this.longitude});
 
   final double latitude, longitude;
 
   @override
-  State<FNMapPage> createState() => _FNMapPageState();
+  State<BoardingLocationMapWidget> createState() =>
+      _BoardingLocationMapWidgetState();
 }
 
-class _FNMapPageState extends State<FNMapPage> {
-  late EdgeInsets safeArea;
-  double drawerHeight = 0;
-
+class _BoardingLocationMapWidgetState extends State<BoardingLocationMapWidget> {
   late NaverMapController mapController;
   late NaverMapViewOptions options = NaverMapViewOptions(
       initialCameraPosition: NCameraPosition(
           target: NLatLng(widget.latitude, widget.longitude), zoom: 15));
 
-  //late final viewModel = Get.find<LineDetailViewModel>();
-
   @override
   Widget build(BuildContext context) {
-    safeArea = MediaQuery.of(context).padding;
-
-    return SizedBox(
-        width: double.infinity, height: double.infinity, child: mapWidget());
-  }
-
-  Widget mapWidget() {
-    final mapPadding = EdgeInsets.only(bottom: drawerHeight - safeArea.bottom);
     return NaverMap(
-      options: options.copyWith(contentPadding: mapPadding),
+      options: options,
       onMapReady: onMapReady,
       onMapTapped: onMapTapped,
       onSymbolTapped: onSymbolTapped,

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:shuttle_king/common/common.dart';
 import 'package:flutter/material.dart';
 

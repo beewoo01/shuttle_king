@@ -3,6 +3,7 @@ import 'package:shuttle_king/screen/main/tab/serch/w_line_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'detail/apply/s_apply_line_join.dart';
 import 'detail/s_line_detail.dart';
 
 class SearchListWidget extends StatefulWidget {
@@ -22,6 +23,7 @@ class _SearchListWidgetState extends State<SearchListWidget> {
         ...viewModel.searchLineList.map((e) => GestureDetector(
             onTap: () {
               print("searchLineList item click");
+
               Get.to(LineDetailScreen(
                 lineIdx: e.line_idx,
               ));
