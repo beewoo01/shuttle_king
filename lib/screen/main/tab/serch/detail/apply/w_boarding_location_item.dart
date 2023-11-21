@@ -67,11 +67,16 @@ class _BoardingLocationItemWidgetState
               .bold
               .make(),
           width30,
-          widget.boardingLocation.line_location_start_time.text.make(),
+          widget.boardingLocation.line_location_start_time.text
+              .color(color)
+              .make(),
           width10,
-          "|".text.make(),
+          "|".text.color(color).make(),
           width10,
-          "${widget.boardingLocation.boarding_count}명 탑승".text.make()
+          "${widget.boardingLocation.boarding_count}명 탑승"
+              .text
+              .color(color)
+              .make()
         ],
       ),
     );

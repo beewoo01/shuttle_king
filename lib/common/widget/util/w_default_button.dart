@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DefaultButtonWidget extends StatelessWidget {
-  const DefaultButtonWidget({super.key, required this.title, required this.callback});
+  const DefaultButtonWidget(
+      {super.key,
+      required this.title,
+      required this.callback,
+      this.backgroundColor = AppColors.mainGreenColor});
+
   final String title;
   final VoidCallback callback;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +19,8 @@ class DefaultButtonWidget extends StatelessWidget {
       width: double.infinity,
       child: TextButton(
         onPressed: callback,
-        style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll<Color>(
-                AppColors.mainGreenColor)),
+        style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll<Color>(backgroundColor)),
         child: title.text.white.make(),
       ),
     );

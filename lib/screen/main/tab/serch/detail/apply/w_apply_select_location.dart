@@ -23,6 +23,7 @@ class _ApplySelectLocationState extends State<ApplySelectLocation> {
         ...viewModel.list.mapIndexed((currentValue, index) => GestureDetector(
               onTap: () {
                 viewModel.selectedPosition.value = index;
+
               },
               child: Obx(() => BoardingLocationItemWidget(
                     boardingLocation: currentValue,
