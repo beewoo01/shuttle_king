@@ -4,6 +4,8 @@ class SettingOperationViewModel extends GetxController {
   final List<String> _weekOfDayList = ["월", "화", "수", "목", "금", "토", "일"];
   final RxList<int> _selectedWeekOfDayList = <int>[].obs;
 
+  //RxList<int> sampleSelectedWeekOfDayList = <int>[].obs;
+
   List<String> get weekOfDayList => _weekOfDayList;
 
   List<int> get selectedWeekOfDayList => _selectedWeekOfDayList;
@@ -25,7 +27,7 @@ class SettingOperationViewModel extends GetxController {
     update();
   }
 
-  final RxList<int> sampleSelectedWeekOfDayList = <int>[].obs;
+  //final RxList<int> sampleSelectedWeekOfDayList = <int>[].obs;
 
   void updateSelected() {
     update();

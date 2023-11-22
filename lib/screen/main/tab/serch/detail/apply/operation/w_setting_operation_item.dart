@@ -25,7 +25,7 @@ class _SettingOperationItemWidgetState
       decoration: BoxDecoration(
           color: widget.backgroundColor,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.grey, width: 0.5)),
+          border: Border.all(color: AppColors.borderGrey, width: 0.5)),
       child: widget.title.text
           .color(widget.textColor)
           .make()
