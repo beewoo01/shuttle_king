@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/constant/app_colors.dart';
+import 'package:shuttle_king/common/constant/app_sizes.dart';
+
+
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
+import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:shuttle_king/common/widget/w_build_text.dart';
+import 'package:shuttle_king/common/widget/w_height_and_width.dart';
 import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/vm_setting_operation.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_am_or_pm_dropdown_button.dart';
 import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_setting_week_of_day.dart';
+import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_textfield_with_sub_text.dart';
+import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_timer_picker.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SettingOperation extends StatefulWidget {
   const SettingOperation({super.key, required this.lineIdx});
@@ -17,12 +24,11 @@ class SettingOperation extends StatefulWidget {
 }
 
 class _SettingOperationState extends State<SettingOperation> {
+
   @override
   void initState() {
     super.initState();
-    print("SettingOperation initState");
     if (!Get.isRegistered<SettingOperationViewModel>()) {
-      print("SettingOperation !Get.isRegistered<SettingOperationViewModel>");
       Get.put(SettingOperationViewModel());
     }
   }
@@ -36,7 +42,7 @@ class _SettingOperationState extends State<SettingOperation> {
         Get.back();
       }),
       body: SingleChildScrollView(
-        child:  Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             height10,
@@ -47,43 +53,27 @@ class _SettingOperationState extends State<SettingOperation> {
             height5,
             const SettingWeekOfDayWidget(),
             height20,
-            const BuildText(
-              title: "출발시간",
-              isBold: true,
-            ),
-            height5,
-            Row(
-              children: [
-                const SizedBox(
-                  width: 80,
-                  height: 40,
-                  child: DropDownButtonAmOrPmWidget(),
-                ),
-                width20,
-                SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    maxLength: 1, // 최대 글자 수
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.black), // 테두리 색상
-                        borderRadius: BorderRadius.circular(8), // 테두리 모양 설정
-                      ),
-                      counterText: ""
-                    ),
-                  ),
-                )
 
-              ],
-            )
+            const TimerPicker(title: "출발시간", isStart: true,),
+            height20,
+            const TimerPicker(title: "도착시간", isStart: false,),
+            height20,
+            const TextFieldWithSubText(title: "수용인원", hint: '인승',),
+            height20,
+            const TextFieldWithSubText(title: "차량종류", hint: '대형 버스', hintTextDirection: TextDirection.ltr,),
+            height20,
+            const TextFieldWithSubText(title: "가격", hint: '원',),
+            height20,
+            DefaultButtonWidget(title: "참여 신청", callback: (){
+              ///TODO 신설 OR 참여신청
+              Get.back();
+            })
 
           ],
         ).pSymmetric(h: AppSizes.defaultPaddingHorizontalSize),
       ),
     );
   }
+
+
 }

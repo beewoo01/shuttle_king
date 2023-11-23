@@ -7,6 +7,7 @@ import 'package:shuttle_king/screen/main/tab/serch/detail/apply/add/s_add_boardi
 import 'package:shuttle_king/screen/main/tab/serch/detail/apply/vm_apply_line.dart';
 
 import '../../../../../../common/common.dart';
+import 'operation/s_setting_operation.dart';
 import 'w_apply_line_info.dart';
 import 'w_apply_select_location.dart';
 
@@ -51,11 +52,16 @@ class _ApplyLineJoinScreenState extends State<ApplyLineJoinScreen> {
                     color: Colors.white,
                     border: Border.all(color: Colors.grey, width: 1),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
-                child: const CustomScrollView(
+                child: CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
                       child: Column(
-                        children: [ApplyLineInfo(), ApplySelectLocation()],
+                        children: [
+                          const ApplyLineInfo(),
+                          ApplySelectLocation(
+                            lineIdx: widget.lineIdx,
+                          )
+                        ],
                       ),
                     ),
                   ],

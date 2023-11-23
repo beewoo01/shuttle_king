@@ -1,6 +1,5 @@
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/theme/custom_theme_app.dart';
-import 'package:shuttle_king/screen/login/s_login.dart';
 import 'package:shuttle_king/screen/main/s_main.dart';
 import 'package:flutter/material.dart';
 

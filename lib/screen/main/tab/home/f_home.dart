@@ -1,104 +1,76 @@
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/round_button_theme.dart';
 import 'package:shuttle_king/common/widget/w_round_button.dart';
 import 'package:shuttle_king/screen/dialog/d_message.dart';
 import 'package:flutter/material.dart';
+import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
+import 'package:shuttle_king/screen/main/map/w_default_map.dart';
+import 'package:shuttle_king/screen/main/tab/home/vm_home.dart';
+import 'package:shuttle_king/screen/main/tab/home/w_home_line_guide.dart';
+import 'package:shuttle_king/screen/main/tab/serch/detail/apply/w_line_detail_sliding_panel.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../dialog/d_color_bottom.dart';
 import '../../../dialog/d_confirm.dart';
+import '../serch/detail/apply/add/w_boarding_location_map.dart';
+import 'lines/s_my_lines.dart';
 
-class HomeFragment extends StatelessWidget {
-  const HomeFragment({
-    Key? key,
-  }) : super(key: key);
+class HomeFragment extends StatefulWidget {
+  const HomeFragment({super.key});
+
+  @override
+  State<HomeFragment> createState() => _HomeFragmentState();
+}
+
+class _HomeFragmentState extends State<HomeFragment> {
+  late HomeViewModel viewModel = Get.put(HomeViewModel());
+
+  @override
+  void initState() {
+    super.initState();
+    if (!Get.isRegistered<HomeViewModel>()) {
+      viewModel.getLineDetail();
+      viewModel.getBoardingLocation();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: context.appColors.seedColor.getMaterialColorValues[100],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      color: AppColors.defaultBackgroundGreyColor,
+      child: Stack(
         children: [
-          /*Row(
-            children: [
-              IconButton(
-                onPressed: () => openDrawer(context),
-                icon: const Icon(Icons.menu),
-              )
-            ],
-          ),*/
-          const EmptyExpanded(),
-          RoundButton(
-            text: 'Snackbar 보이기',
-            onTap: () => showSnackbar(context),
-            theme: RoundButtonTheme.blue,
+          DefaultMap(
+            latitude: viewModel.model.line_destination_latitude,
+            longitude: viewModel.model.line_destination_longitude,
+            locationModel: viewModel.boardingLocationList
+                .map((e) => LocationModel(
+                      idx: e.line_location_idx,
+                      title: e.line_location_address,
+                      position: e.line_location_boarding_number,
+                      latitude: e.line_location_latitude,
+                      longitude: e.line_location_longitude,
+                    ))
+                .toList(),
           ),
-          const Height(20),
-          RoundButton(
-            text: 'Confirm 다이얼로그',
-            onTap: () => showConfirmDialog(context),
-            theme: RoundButtonTheme.whiteWithBlueBorder,
+
+          SlidingUpPanel(
+            panel: const HomeLineGuide().pSymmetric(h: 20),
+            borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+            maxHeight: 350,
           ),
-          const Height(20),
-          RoundButton(
-            text: 'Message 다이얼로그',
-            onTap: showMessageDialog,
-            theme: RoundButtonTheme.whiteWithBlueBorder,
+
+          Positioned(
+            right: 20,
+            bottom: 50,
+            child: FloatingActionButton(onPressed: (){
+              Get.to(const MyLines());
+            }),
           ),
-          const Height(20),
-          RoundButton(
-            text: '메뉴 보기',
-            onTap: () => openDrawer(context),
-            theme: RoundButtonTheme.blink,
-          ),
-          const EmptyExpanded()
         ],
       ),
     );
-  }
-
-  void showSnackbar(BuildContext context) {
-    context.showSnackbar('snackbar 입니다.',
-        extraButton: Tap(
-          onTap: () {
-            context.showErrorSnackbar('error');
-          },
-          child: '에러 보여주기 버튼'.text.white.size(13).make().centered().pSymmetric(h: 10, v: 5),
-        ));
-  }
-
-  Future<void> showConfirmDialog(BuildContext context) async {
-    final confirmDialogResult = await ConfirmDialog(
-      '오늘 기분이 좋나요?',
-      buttonText: "네",
-      cancelButtonText: "아니오",
-    ).show();
-    debugPrint(confirmDialogResult?.isSuccess.toString());
-
-    confirmDialogResult?.runIfSuccess((data) {
-      ColorBottomSheet(
-        '❤️',
-        context: context,
-        backgroundColor: Colors.yellow.shade200,
-      ).show();
-    });
-
-    confirmDialogResult?.runIfFailure((data) {
-      ColorBottomSheet(
-        '❤️힘내여',
-        backgroundColor: Colors.yellow.shade300,
-        textColor: Colors.redAccent,
-      ).show();
-    });
-  }
-
-  Future<void> showMessageDialog() async {
-    final result = await MessageDialog("안녕하세요").show();
-    debugPrint(result.toString());
-  }
-
-  void openDrawer(BuildContext context) {
-    Scaffold.of(context).openDrawer();
   }
 }

@@ -2,14 +2,16 @@ import 'package:get/get.dart';
 import 'package:shuttle_king/screen/main/tab/serch/vo/vo_bording_location.dart';
 import 'package:shuttle_king/screen/main/tab/serch/vo/vo_line_detail.dart';
 
-class LineDetailViewModel extends GetxController {
-  //var model = LineDetail(line_idx: 0, line_account_idx: 0, line_capacity: null).obs;
-  late Rx<LineDetail> model;
+class HomeViewModel extends GetxController {
+
+  late Rx<LineDetail> _model;
+
   final RxList<BoardingLocation> _boardingLocationList = <BoardingLocation>[].obs;
   List<BoardingLocation> get boardingLocationList => _boardingLocationList;
+  LineDetail get model  => _model.value;
 
   void getLineDetail() {
-    model = LineDetail(
+    _model = LineDetail(
         line_idx: 1,
         line_account_idx: 2,
         line_capacity: 10,

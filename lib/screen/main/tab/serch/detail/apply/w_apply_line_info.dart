@@ -16,7 +16,7 @@ class ApplyLineInfo extends StatelessWidget {
           isBold: true,
         ),
         height5,
-        BuildText(title: "부산 사상구 사상로 10"),
+        BuildText(title: "부산 사상구 사상로 10", size: 16,),
 
         height20,
         BuildText(
@@ -24,7 +24,7 @@ class ApplyLineInfo extends StatelessWidget {
           isBold: true,
         ),
         height5,
-        BuildText(title: "부산 사상구 사상로 600번길 600"),
+        BuildText(title: "부산 사상구 사상로 600번길 600", size: 16),
 
         height20,
         BuildText(
@@ -32,7 +32,7 @@ class ApplyLineInfo extends StatelessWidget {
           isBold: true,
         ),
         height5,
-        BuildText(title: "10시 30분"),
+        BuildText(title: "10시 30분", size: 16),
         height20,
 
         Row(
@@ -47,7 +47,7 @@ class ApplyLineInfo extends StatelessWidget {
                     isBold: true,
                   ),
                   height5,
-                  BuildText(title: "6"),
+                  BuildText(title: "6", size: 16),
                 ],
               ),
             ),
@@ -61,7 +61,7 @@ class ApplyLineInfo extends StatelessWidget {
                     isBold: true,
                   ),
                   height5,
-                  BuildText(title: "10"),
+                  BuildText(title: "10", size: 16),
                 ],
               ),
             )
@@ -82,7 +82,7 @@ class ApplyLineInfo extends StatelessWidget {
                     isBold: true,
                   ),
                   height5,
-                  BuildText(title: "주 2회 (월, 화)"),
+                  BuildText(title: "주 2회 (월, 화)", size: 16),
                 ],
               ),
             ),
@@ -96,7 +96,7 @@ class ApplyLineInfo extends StatelessWidget {
                     isBold: true,
                   ),
                   height5,
-                  BuildText(title: "버스"),
+                  BuildText(title: "버스", size: 16),
                 ],
               ),
             )

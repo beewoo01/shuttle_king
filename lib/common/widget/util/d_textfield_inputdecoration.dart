@@ -2,11 +2,12 @@ import 'package:shuttle_king/common/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldInputDecoration extends InputDecoration {
-  InputDecoration getDefaultInputDecoration(String hint, {Icon? prefixIcon}) {
+  InputDecoration getDefaultInputDecoration(String hint, {Icon? prefixIcon, hintTextDirection = TextDirection.ltr}) {
     return InputDecoration(
         fillColor: Colors.white,
         filled: true,
         hintText: hint,
+        hintTextDirection: hintTextDirection,
         hintStyle: const TextStyle(color: AppColors.borderGrey),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),

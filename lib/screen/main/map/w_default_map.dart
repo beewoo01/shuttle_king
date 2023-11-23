@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
 
 import '../tab/serch/detail/vm_line_detail.dart';
 
-class FNMapPage extends StatefulWidget {
-  const FNMapPage({super.key, required this.latitude, required this.longitude});
+class DefaultMap extends StatefulWidget {
+  const DefaultMap(
+      {super.key,
+      required this.latitude,
+      required this.longitude,
+      required this.locationModel});
 
   final double latitude, longitude;
+  final List<LocationModel> locationModel;
 
   @override
-  State<FNMapPage> createState() => _FNMapPageState();
+  State<DefaultMap> createState() => _DefaultMapState();
 }
 
-class _FNMapPageState extends State<FNMapPage> {
+class _DefaultMapState extends State<DefaultMap> {
   late EdgeInsets safeArea;
   double drawerHeight = 0;
 
@@ -22,7 +29,37 @@ class _FNMapPageState extends State<FNMapPage> {
       initialCameraPosition: NCameraPosition(
           target: NLatLng(widget.latitude, widget.longitude), zoom: 15));
 
-  //late final viewModel = Get.find<LineDetailViewModel>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void setMapMarkers() {
+    final List<NMarker> markers = [];
+    for (var element in widget.locationModel) {
+      NMarker marker = NMarker(
+          id: element.idx.toString(),
+          position: NLatLng(element.latitude, element.longitude));
+
+      String assetImg = "$basePath/icon/";
+
+      if(element.position == 1) {
+        assetImg += "icon_start_b.png";
+      } else if(element.position == 99) {
+        assetImg += "icon_arrival_b.png";
+      } else {
+        assetImg += "icon_pick.png";
+      }
+
+      marker.setIcon(NOverlayImage.fromAssetImage(assetImg));
+      markers.add(marker);
+
+    }
+
+    mapController.addOverlayAll(markers.toSet());
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +85,14 @@ class _FNMapPageState extends State<FNMapPage> {
   void onMapReady(NaverMapController controller) {
     mapController = controller;
     print("네이버 맵 로딩 됨");
+    setMapMarkers();
   }
 
   void onMapTapped(NPoint point, NLatLng latLng) {
-    // ...
+    double latitude = latLng.latitude;
+    double longitude = latLng.longitude;
+    print("latitude $latitude");
+    print("longitude $longitude");
   }
 
   void onSymbolTapped(NSymbolInfo symbolInfo) {

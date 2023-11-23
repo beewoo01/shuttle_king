@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiver/check.dart';
 import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/s_setting_operation.dart';
 import 'package:shuttle_king/screen/main/tab/serch/detail/apply/vm_apply_line.dart';
 
 import 'w_boarding_location_item.dart';
 
 class ApplySelectLocation extends StatefulWidget {
-  const ApplySelectLocation({super.key});
+  const ApplySelectLocation({super.key, required this.lineIdx});
+
+  final int lineIdx;
 
   @override
   State<ApplySelectLocation> createState() => _ApplySelectLocationState();
@@ -22,12 +25,15 @@ class _ApplySelectLocationState extends State<ApplySelectLocation> {
       children: [
         ...viewModel.list.mapIndexed((currentValue, index) => GestureDetector(
               onTap: () {
-                viewModel.selectedPosition.value = index;
+                Get.to(SettingOperation(
+                  lineIdx: widget.lineIdx,
+                ));
+                //viewModel.setSelectedPosition(index);
 
               },
               child: Obx(() => BoardingLocationItemWidget(
                     boardingLocation: currentValue,
-                    isSelected: viewModel.selectedPosition.value == index,
+                    isSelected: viewModel.selectedPosition == index,
                     index: viewModel.list.length - 1 == index ? -2 : index,
                   )),
             ))

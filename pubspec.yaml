@@ -77,7 +77,7 @@ dependencies:
   #naver map
   #flutter_naver_map: ^1.0.2
   flutter_naver_map: ^1.0.0-dev.5
-
+  sliding_up_panel: ^2.0.0+1
   datetime_picker_formfield_new: ^2.1.0
 
 dev_dependencies:

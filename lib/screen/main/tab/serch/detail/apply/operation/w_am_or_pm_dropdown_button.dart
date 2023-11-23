@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/vm_setting_operation.dart';
 
 class DropDownButtonAmOrPmWidget extends StatefulWidget {
   const DropDownButtonAmOrPmWidget({super.key});
@@ -11,13 +13,14 @@ class DropDownButtonAmOrPmWidget extends StatefulWidget {
 
 class _DropDownButtonAmOrPmWidgetState
     extends State<DropDownButtonAmOrPmWidget> {
+
+  SettingOperationViewModel viewModel = Get.find<SettingOperationViewModel>();
+
   final _valueList = ["오전", "오후"];
-  late String _selectedValue;
 
   @override
   void initState() {
     super.initState();
-    _selectedValue = _valueList[0];
   }
 
   @override
@@ -25,22 +28,20 @@ class _DropDownButtonAmOrPmWidgetState
     return DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.white,
-          //background color of dropdown button
           border: Border.all(color: AppColors.borderGrey, width: 0.5),
-          //border of dropdown button
           borderRadius:
               BorderRadius.circular(50), //border raiuds of dropdown button
         ),
-        child: DropdownButton(
-          value: _selectedValue,
+        child: Obx(() => DropdownButton(
+          value: viewModel.startTimePeriod,
           items: _valueList
               .map((e) => DropdownMenuItem(
-                    value: e,
-                    child: e.text.make(),
-                  ))
+            value: e,
+            child: e.text.make(),
+          ))
               .toList(),
           onChanged: (value) {
-            _selectedValue = value.toString();
+            viewModel.setStartTimePeriod(value.toString());
           },
           icon: const Icon(
             Icons.keyboard_arrow_down,
@@ -54,25 +55,7 @@ class _DropDownButtonAmOrPmWidgetState
           underline: Container(),
           //remove underline
           isExpanded: true, //make true to make width 100%
-        ).pSymmetric(h: 10));
+        )).pSymmetric(h: 10));
 
-    /*DropdownButtonFormField(
-        itemHeight: 50,
-        isExpanded: true,
-        decoration: InputDecoration(
-
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(50))),
-        value: _selectedValue,
-        items: _valueList
-            .map((e) => DropdownMenuItem(
-                  value: e,
-                  child: e.text.make(),
-                ))
-            .toList(),
-        onChanged: (value) {
-          setState(() {
-            _selectedValue = value.toString();
-          });
-        });*/
   }
 }

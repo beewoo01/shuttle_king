@@ -5,8 +5,8 @@ class LineDetail {
   String line_car_type;
   String line_price;
   String line_destination_address;
-  String line_destination_latitude;
-  String line_destination_longitude;
+  double line_destination_latitude;
+  double line_destination_longitude;
   String line_createtime;
 
   LineDetail(
