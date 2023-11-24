@@ -31,7 +31,9 @@ class LineDetailViewModel extends GetxController {
           line_location_address: '부산광역시 사상구 사상로 330',
           line_location_start_time: '10:30',
           line_location_end_time: '11:00',
-          line_location_boarding_number: 1, boarding_count: 1),
+          line_location_boarding_number: 1,
+          boarding_count: 1,
+          line_price: 2000),
 
       BoardingLocation(
           line_location_idx: 2,
@@ -41,7 +43,9 @@ class LineDetailViewModel extends GetxController {
           line_location_address: '부산광역시 사상구 사상로 331',
           line_location_start_time: '10:30',
           line_location_end_time: '11:00',
-          line_location_boarding_number: 2, boarding_count: 1),
+          line_location_boarding_number: 2,
+          boarding_count: 1,
+          line_price: 3000),
 
       BoardingLocation(
           line_location_idx: 3,
@@ -51,7 +55,9 @@ class LineDetailViewModel extends GetxController {
           line_location_address: '부산광역시 사상구 사상로 332',
           line_location_start_time: '10:30',
           line_location_end_time: '11:00',
-          line_location_boarding_number: 3, boarding_count: 2),
+          line_location_boarding_number: 3,
+          boarding_count: 2,
+          line_price: 2500),
 
       BoardingLocation(
           line_location_idx: 4,
@@ -61,7 +67,9 @@ class LineDetailViewModel extends GetxController {
           line_location_address: '부산광역시 사상구 사상로 333',
           line_location_start_time: '10:30',
           line_location_end_time: '11:00',
-          line_location_boarding_number: 4, boarding_count: 2),
+          line_location_boarding_number: 4,
+          boarding_count: 2,
+          line_price: 3400),
 
       BoardingLocation(
           line_location_idx: 5,
@@ -71,7 +79,9 @@ class LineDetailViewModel extends GetxController {
           line_location_address: '부산광역시 사상구 사상로 334',
           line_location_start_time: '10:30',
           line_location_end_time: '11:00',
-          line_location_boarding_number: 99, boarding_count: 2),
+          line_location_boarding_number: 99,
+          boarding_count: 2,
+          line_price: 4000),
     ];
 
     _boardingLocationList.value = list;

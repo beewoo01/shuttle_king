@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
-import 'package:shuttle_king/screen/main/tab/home/lines/vm_my_lines.dart';
-import 'package:shuttle_king/screen/main/tab/home/lines/w_my_lines_item.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/lines/vm_my_lines.dart';
+
+import 'detail/s_line_passengers_detail.dart';
+import 'w_my_lines_item.dart';
 
 class MyLines extends StatefulWidget {
   const MyLines({super.key});
@@ -34,7 +36,9 @@ class _MyLinesState extends State<MyLines> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ...viewModel.myLines.map((e) => MyLinesItem(line: e))
+            ...viewModel.myLines.map((e) => GestureDetector(onTap: (){
+              Get.to(LinePassengersDetail(line: e));
+            },child: MyLinesItem(line: e)))
           ],
         ).pSymmetric(h: 29),
       ),

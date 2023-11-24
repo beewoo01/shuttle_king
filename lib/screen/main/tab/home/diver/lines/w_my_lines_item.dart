@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shuttle_king/screen/main/widget/build_sub_text_line.dart';
 import 'package:shuttle_king/screen/main/widget/w_build_address_location.dart';
 
-import '../../../../../common/common.dart';
+import '../../../../../../common/common.dart';
 import 'vo/vo_my_line.dart';
 
 class MyLinesItem extends StatelessWidget {

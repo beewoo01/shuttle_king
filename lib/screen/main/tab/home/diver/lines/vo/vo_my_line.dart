@@ -5,6 +5,7 @@ class MyLine {
   String start_time;
   int line_capacity;
   int current_passangers_count;
+  int line_price;
 
   MyLine(
       {required this.line_idx,
@@ -12,5 +13,6 @@ class MyLine {
       required this.line_destination_address,
       required this.start_time,
       required this.line_capacity,
-      required this.current_passangers_count});
+      required this.current_passangers_count,
+      required this.line_price});
 }

@@ -1,3 +1,4 @@
+import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/w_build_text.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,8 @@ class BuildSubLineText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        BuildText(title: title, size: 13, isBold: true,),
-        BuildText(title: content, size: 13)
+        BuildText(title: title, size: 13, isBold: true, color: AppColors.darkGrey,),
+        BuildText(title: content, size: 13, color: AppColors.darkGrey)
 
       ],
     );

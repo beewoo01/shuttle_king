@@ -8,6 +8,7 @@ class BoardingLocation {
   String line_location_end_time;
   int line_location_boarding_number;
   int boarding_count;
+  int line_price;
 
   BoardingLocation(
       {required this.line_location_idx,
@@ -18,6 +19,6 @@ class BoardingLocation {
       required this.line_location_start_time,
       required this.line_location_end_time,
       required this.line_location_boarding_number,
-      required this.boarding_count
-      });
+      required this.boarding_count,
+      required this.line_price});
 }
