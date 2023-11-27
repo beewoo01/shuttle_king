@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:shuttle_king/app.dart';
 import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/data/singleton.dart';
 import 'package:shuttle_king/common/util/e_user_type.dart';
 import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
@@ -57,6 +58,8 @@ class _LoginScreenState extends State<LoginScreen>
             DefaultButtonWidget(
               title: "로그인",
               callback: () {
+                Singleton().accountIdx = 1;
+                Singleton().isDriver = false;
                 Get.to( const App());
                     //const MainScreen());
               },

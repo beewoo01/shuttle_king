@@ -52,7 +52,7 @@ class _LineDetailScreenState extends State<LineDetailScreen> {
           DefaultMap(
             latitude: model.line_destination_latitude,
             longitude: model.line_destination_longitude,
-            locationModel: viewModel.boardingLocationList
+            locationModelList: viewModel.boardingLocationList
                 .map((e) => LocationModel(
                       idx: e.line_location_idx,
                       title: e.line_location_address,

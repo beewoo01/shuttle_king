@@ -1,23 +1,22 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:shuttle_king/common/data/singleton.dart';
+import 'package:get/get.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
+import 'package:shuttle_king/screen/main/map/w_default_map.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/lines/s_my_lines.dart';
 import 'package:shuttle_king/screen/main/tab/home/diver/vm_home_driver.dart';
-import 'package:shuttle_king/screen/main/tab/home/diver/w_home_driver.dart';
-import 'package:shuttle_king/screen/main/tab/home/passenger/w_home_passenger.dart';
+import 'package:shuttle_king/screen/main/tab/home/w_home_line_guide.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-
-class HomeFragment extends StatefulWidget {
-  const HomeFragment({super.key});
+class HomeDriver extends StatefulWidget {
+  const HomeDriver({super.key});
 
   @override
-  State<HomeFragment> createState() => _HomeFragmentState();
+  State<HomeDriver> createState() => _HomeDriverState();
 }
 
-class _HomeFragmentState extends State<HomeFragment> {
+class _HomeDriverState extends State<HomeDriver> {
   late DriverHomeViewModel viewModel = Get.put(DriverHomeViewModel());
-  int _uniqueHeroTagIndex = 0;
-
-  Singleton singleton = Singleton();
 
   @override
   void initState() {
@@ -30,31 +29,21 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   @override
   Widget build(BuildContext context) {
-    print("singleton.isDriver");
-    print(singleton.isDriver);
-    if(singleton.isDriver ?? false) {
-      print("if(singleton.isDriver ?? false)");
-      return const HomeDriver();
-    } else {
-      print("else");
-      return const HomePassenger();
-    }
-
-    /*Container(
+    return Container(
       color: AppColors.defaultBackgroundGreyColor,
       child: Stack(
         children: [
           DefaultMap(
             latitude: viewModel.model.line_destination_latitude,
             longitude: viewModel.model.line_destination_longitude,
-            locationModel: viewModel.boardingLocationList
+            locationModelList: viewModel.boardingLocationList
                 .map((e) => LocationModel(
-                      idx: e.line_location_idx,
-                      title: e.line_location_address,
-                      position: e.line_location_boarding_number,
-                      latitude: e.line_location_latitude,
-                      longitude: e.line_location_longitude,
-                    ))
+              idx: e.line_location_idx,
+              title: e.line_location_address,
+              position: e.line_location_boarding_number,
+              latitude: e.line_location_latitude,
+              longitude: e.line_location_longitude,
+            ))
                 .toList(),
           ),
           SlidingUpPanel(
@@ -67,7 +56,7 @@ class _HomeFragmentState extends State<HomeFragment> {
             right: 20,
             bottom: 50,
             child: FloatingActionButton(
-              heroTag: "Move My Line ${_uniqueHeroTagIndex++}",
+              heroTag: "Move Driver Line",
               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30.0))),
               backgroundColor: AppColors.mainGreenColor,
               onPressed: () {
@@ -82,6 +71,6 @@ class _HomeFragmentState extends State<HomeFragment> {
           ),
         ],
       ),
-    );*/
+    );
   }
 }

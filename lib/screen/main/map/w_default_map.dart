@@ -11,10 +11,10 @@ class DefaultMap extends StatefulWidget {
       {super.key,
       required this.latitude,
       required this.longitude,
-      required this.locationModel});
+      required this.locationModelList});
 
   final double latitude, longitude;
-  final List<LocationModel> locationModel;
+  final List<LocationModel>? locationModelList;
 
   @override
   State<DefaultMap> createState() => _DefaultMapState();
@@ -33,11 +33,15 @@ class _DefaultMapState extends State<DefaultMap> {
   @override
   void initState() {
     super.initState();
+    print("widget.latitude");
+    print(widget.latitude);
+    print("widget.longitude");
+    print(widget.longitude);
   }
 
   void setMapMarkers() {
     final List<NMarker> markers = [];
-    for (var element in widget.locationModel) {
+    for (var element in widget.locationModelList!) {
       NMarker marker = NMarker(
           id: element.idx.toString(),
           position: NLatLng(element.latitude, element.longitude));
@@ -85,7 +89,10 @@ class _DefaultMapState extends State<DefaultMap> {
   void onMapReady(NaverMapController controller) {
     mapController = controller;
     print("네이버 맵 로딩 됨");
-    setMapMarkers();
+    if(widget.locationModelList != null) {
+      setMapMarkers();
+    }
+
   }
 
   void onMapTapped(NPoint point, NLatLng latLng) {

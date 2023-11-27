@@ -1,4 +1,3 @@
-import 'package:shuttle_king/common/constant/app_sizes.dart';
 import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../../common/common.dart';
 
 class InputSearchInfoWidget extends StatelessWidget {
-  const InputSearchInfoWidget({super.key});
+  const InputSearchInfoWidget({super.key, required this.callback});
+
+  final VoidCallback callback;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +31,7 @@ class InputSearchInfoWidget extends StatelessWidget {
               .getDefaultInputDecoration("도착지 입력"),
         ),
         height10,
-        DefaultButtonWidget(title: "찾기", callback: (){
-
-        })
+        DefaultButtonWidget(title: "찾기", callback: callback)
       ],
     );
   }

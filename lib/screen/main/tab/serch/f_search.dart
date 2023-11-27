@@ -44,7 +44,7 @@ class _SearchState extends State<Search> {
                   color: AppColors.mainGreenColor,
                 ),
               ),
-              title: "내 노선 목록"
+              title: "노선 목록"
                   .text
                   .fontFamily("TmonMonsori")
                   .color(AppColors.mainGreenColor)
@@ -54,12 +54,14 @@ class _SearchState extends State<Search> {
             ),
 
             SliverToBoxAdapter(
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InputSearchInfoWidget(),
+                  InputSearchInfoWidget(callback: (){
+
+                  },),
                   height20,
-                  SearchListWidget(),
+                  const SearchListWidget(),
                   height30
                 ],
               ).pSymmetric(h: AppSizes.defaultPaddingHorizontalSize, v: 15),
