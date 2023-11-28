@@ -35,15 +35,6 @@ class _SearchState extends State<Search> {
           slivers: [
             SliverAppBar(
               backgroundColor: AppColors.defaultBackgroundGreyColor,
-              leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios_new,
-                  color: AppColors.mainGreenColor,
-                ),
-              ),
               title: "노선 목록"
                   .text
                   .fontFamily("TmonMonsori")

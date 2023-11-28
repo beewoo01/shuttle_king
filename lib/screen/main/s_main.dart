@@ -144,7 +144,6 @@ class MainScreenState extends State<MainScreen> {
         navigationKey.currentState!.pop();
       }
     }
-
   }
 
   void initNavigatorKeys() {

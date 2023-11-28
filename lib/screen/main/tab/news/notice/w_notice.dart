@@ -3,9 +3,12 @@ import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 
 import 'vm_notice.dart';
+import 'vo_notice.dart';
 
 class Notice extends StatelessWidget {
-  const Notice({super.key});
+  const Notice({super.key, required this.callback});
+
+  final Function(NoticeVO noticeVO) callback;
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +25,24 @@ class Notice extends StatelessWidget {
           ...viewModel.noticeList.map((e) => GestureDetector(
                 onTap: () {
                   print("viewModel.noticeList");
+                  callback(e);
                 },
-                child: Column(children: [
-                  height10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      e.noticeTitle.text.size(14).make(),
-                      e.noticeCreateTime.text.size(14).make()
-                    ],
-                  ).pSymmetric(h: 10),
-                  height20,
-                  const Line(color: AppColors.grey, height: 0.5,),
-                  height10,
-                ]).pSymmetric(h: 10, ),
+                child: Container(
+                  color: Colors.transparent,
+                  child: Column(children: [
+                    height10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        e.title.text.size(14).make(),
+                        e.noticeCreateTime.text.size(14).make()
+                      ],
+                    ).pSymmetric(h: 10),
+                    height20,
+                    const Line(color: AppColors.grey, height: 0.5,),
+                    height10,
+                  ]).pSymmetric(h: 10, ),
+                ),
               ))
         ],
       ),

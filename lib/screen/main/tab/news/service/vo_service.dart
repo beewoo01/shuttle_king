@@ -1,12 +1,11 @@
-class ServiceVO {
-  int serviceIdx;
+import 'package:shuttle_king/screen/main/tab/news/vo_news.dart';
+
+class ServiceVO extends NewsVO {
+  /*int serviceIdx;
   String serviceTitle;
-  String serviceContent;
+  String serviceContent;*/
   String serviceCreateTime;
 
-  ServiceVO(
-      {required this.serviceIdx,
-      required this.serviceTitle,
-      required this.serviceContent,
-      required this.serviceCreateTime});
+  ServiceVO(super.idx, super.title, super.content,
+      {required this.serviceCreateTime});
 }

@@ -33,7 +33,7 @@ class EventItem extends StatelessWidget {
             ),
           ),
           height10,
-          eventVO.eventTitle.text.size(15).make().pSymmetric(h: 10),
+          eventVO.title.text.size(15).make().pSymmetric(h: 10),
           height10,
           Row(
             children: [

@@ -8,15 +8,18 @@ class EventViewModel extends GetxController {
   void getEventList() {
     List<EventVO> list = [];
     for (int i = 0; i < 30; i++) {
-      list.add(EventVO(idx: i + 1,
-          eventTitle: "eventTitle${i + 1}",
+      list.add(EventVO(
+          i + 1,
+          "eventTitle${i + 1}",
+          "eventContent${i + 1}",
           startDate: "2023.11.10",
           endDate: "2023.11.29",
-          eventStatus: 0));
+          eventStatus: 0,
+          eventImageUrl: "eventImageUrl${i+1}",
+          eventCreateTime: "2023.11.10"));
     }
 
     _eventList.clear();
     _eventList.addAll(list);
   }
-
 }
