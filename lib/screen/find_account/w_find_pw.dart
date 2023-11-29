@@ -3,11 +3,13 @@ import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shuttle_king/screen/dialog/d_alarm.dart';
 
 class FindPwWidget extends StatelessWidget {
   const FindPwWidget({super.key});
 
   double get defaultTextSize => 18;
+
   double get defaultPaddingHorizontalSize => 29;
 
   @override
@@ -43,9 +45,7 @@ class FindPwWidget extends StatelessWidget {
         height10,
         TextField(
           keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: TextFieldInputDecoration()
               .getDefaultInputDecoration("'-' 제외하고 숫자만 입력"),
         ),
@@ -53,7 +53,13 @@ class FindPwWidget extends StatelessWidget {
         DefaultButtonWidget(
           title: "비밀번호찾기",
           callback: () {
-
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return const Dialog(
+                    child: SimpleAlarmDialog(title: "비밀번호는 000 입니다."),
+                  );
+                });
           },
         ),
       ],

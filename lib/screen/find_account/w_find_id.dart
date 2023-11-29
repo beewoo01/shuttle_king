@@ -2,6 +2,7 @@ import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shuttle_king/screen/dialog/d_alarm.dart';
 
 import '../../common/widget/util/d_textfield_inputdecoration.dart';
 
@@ -9,6 +10,7 @@ class FindIdWidget extends StatelessWidget {
   const FindIdWidget({super.key});
 
   double get defaultTextSize => 18;
+
   double get defaultPaddingHorizontalSize => 29;
 
   @override
@@ -40,12 +42,16 @@ class FindIdWidget extends StatelessWidget {
           decoration: TextFieldInputDecoration()
               .getDefaultInputDecoration("'-' 제외하고 숫자만 입력"),
         ),
-
         height20,
         DefaultButtonWidget(
           title: "아이디찾기",
           callback: () {
-
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return const Dialog(
+                      child: SimpleAlarmDialog(title: "아이디는 000 입니다."));
+                });
           },
         ),
       ],

@@ -8,6 +8,7 @@ import 'package:shuttle_king/common/util/e_user_type.dart';
 import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:shuttle_king/screen/find_account/s_find_account_info.dart';
+import 'package:shuttle_king/screen/join/d_select_join_status.dart';
 import 'package:shuttle_king/screen/join/s_join.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -22,8 +23,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin, AfterLayoutMixin {
-
   double get horizontalPaddingSize => 20;
+
   double get findAccountTextSize => 14;
 
   @override
@@ -60,8 +61,8 @@ class _LoginScreenState extends State<LoginScreen>
               callback: () {
                 Singleton().accountIdx = 1;
                 Singleton().isDriver = false;
-                Get.to( const App());
-                    //const MainScreen());
+                Get.to(const App());
+                //const MainScreen());
               },
             ),
             Row(
@@ -77,11 +78,12 @@ class _LoginScreenState extends State<LoginScreen>
                     onPressed: () {
                       Get.to(const FindAccountInfoScreen());
                     },
-                    child: "비밀번호찾기".text.size(findAccountTextSize).black.make()),
+                    child:
+                        "비밀번호찾기".text.size(findAccountTextSize).black.make()),
                 "|".text.make(),
                 TextButton(
                     onPressed: () {
-                      Get.to(const JoinScreen(userType: UserType.DRIVER,));
+                      moveJoin();
                     },
                     child: "회원가입".text.size(findAccountTextSize).black.make()),
               ],
@@ -90,6 +92,27 @@ class _LoginScreenState extends State<LoginScreen>
         ).pSymmetric(h: horizontalPaddingSize),
       ),
     );
+  }
+
+  void moveJoin() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0)),
+            child: SelectJoinStatus(
+              callback: (UserType userType) {
+                Get.back();
+                Get.to(JoinScreen(
+                  userType: userType,
+                ));
+              },
+            ),
+          );
+
+          //Get.to(const JoinScreen(userType: UserType.DRIVER,));
+        });
   }
 
   @override

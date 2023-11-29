@@ -8,6 +8,7 @@ class CustomAppbar extends AppBar {
   AppBar createAppbar(String title, VoidCallback callback, {bool isShowBackButton = true}) {
     return AppBar(
       backgroundColor: AppColors.defaultBackgroundGreyColor,
+      surfaceTintColor: Colors.transparent,
       leading: isShowBackButton ? IconButton(
         onPressed: callback,
         icon: const Icon(

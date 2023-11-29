@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/theme/color/dark_app_colors.dart';
 import 'package:shuttle_king/common/theme/color/light_app_colors.dart';
@@ -34,6 +35,7 @@ ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
+
     // textTheme: CustomGoogleFonts.diphylleiaTextTheme(
     //   ThemeData(brightness: Brightness.light).textTheme,
     // ),

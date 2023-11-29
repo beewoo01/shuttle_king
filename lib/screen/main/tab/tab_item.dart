@@ -1,6 +1,7 @@
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/screen/main/tab/favorite/f_favorite.dart';
 import 'package:shuttle_king/screen/main/tab/home/f_home.dart';
+import 'package:shuttle_king/screen/main/tab/my/f_my_info.dart';
 import 'package:shuttle_king/screen/main/tab/serch/f_search.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ enum TabItem {
   home(Icons.home_filled, '홈', HomeFragment()),
   lineSearch(Icons.search, '노선검색', Search()),
   news(Icons.notifications, '뉴스', News()),
-  myInfo(Icons.person_3_rounded, '내 정보', HomeFragment());
+  myInfo(Icons.person_3_rounded, '내 정보', MyInfo());
 
   final IconData activeIcon;
   final IconData inActiveIcon;

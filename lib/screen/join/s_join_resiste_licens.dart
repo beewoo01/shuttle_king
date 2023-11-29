@@ -3,6 +3,7 @@ import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:shuttle_king/screen/dialog/d_alarm.dart';
 
 class JoinRegistrationLicense extends StatefulWidget {
   const JoinRegistrationLicense({super.key});
@@ -46,7 +47,18 @@ class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
           ),
           height30,
           DefaultButtonWidget(title: "회원가입", callback: () {
-            
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    child: const SimpleAlarmDialog(
+                      title: "관리자 승인 후\n이용이 가능합니다.",
+                    ),
+                  );
+                });
+
           })
         ],
       ).pSymmetric(h: 29),
