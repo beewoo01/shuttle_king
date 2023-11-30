@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/vm_setting_operation.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/vm_setting_operation.dart';
 
 class DropDownButtonAmOrPmWidget extends StatefulWidget {
   const DropDownButtonAmOrPmWidget({super.key});

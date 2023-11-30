@@ -6,7 +6,7 @@ import 'package:shuttle_king/common/constant/app_colors.dart';
 import 'package:shuttle_king/common/widget/w_build_text.dart';
 import 'package:shuttle_king/common/widget/w_height_and_width.dart';
 import 'package:shuttle_king/common/widget/w_one_text_container.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_am_or_pm_dropdown_button.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/w_am_or_pm_dropdown_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'vm_setting_operation.dart';

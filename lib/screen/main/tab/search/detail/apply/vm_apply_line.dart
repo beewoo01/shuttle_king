@@ -1,25 +1,13 @@
 import 'package:get/get.dart';
-import 'package:shuttle_king/screen/main/tab/serch/vo/vo_bording_location.dart';
-import 'package:shuttle_king/screen/main/tab/serch/vo/vo_line_detail.dart';
+import 'package:shuttle_king/screen/main/tab/search/vo/vo_bording_location.dart';
 
-class LineDetailViewModel extends GetxController {
-  //var model = LineDetail(line_idx: 0, line_account_idx: 0, line_capacity: null).obs;
-  late Rx<LineDetail> model;
-  final RxList<BoardingLocation> _boardingLocationList = <BoardingLocation>[].obs;
-  List<BoardingLocation> get boardingLocationList => _boardingLocationList;
+class ApplyLineViewModel extends GetxController {
+  RxList<BoardingLocation> list = <BoardingLocation>[].obs;
+  final RxInt _selectedPosition = (-1).obs;
 
-  void getLineDetail() {
-    model = LineDetail(
-        line_idx: 1,
-        line_account_idx: 2,
-        line_capacity: 10,
-        line_car_type: "봉고",
-        line_price: "3000",
-        line_destination_address: "부산광역시 사상구 사상로 330",
-        line_destination_latitude: 35.1710712,
-        line_destination_longitude: 128.9843348,
-        line_createtime: "2023-11-16 16:07:00").obs;
-  }
+  int get selectedPosition => _selectedPosition.value;
+
+  void setSelectedPosition(int position) => _selectedPosition.value = position;
 
   void getBoardingLocation() {
     List<BoardingLocation> list = [
@@ -84,6 +72,6 @@ class LineDetailViewModel extends GetxController {
           line_price: 4000),
     ];
 
-    _boardingLocationList.value = list;
+    this.list.value = list;
   }
 }

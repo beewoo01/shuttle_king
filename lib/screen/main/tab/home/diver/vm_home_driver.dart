@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:shuttle_king/screen/main/tab/serch/vo/vo_bording_location.dart';
-import 'package:shuttle_king/screen/main/tab/serch/vo/vo_line_detail.dart';
+import 'package:shuttle_king/screen/main/tab/search/vo/vo_bording_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/vo/vo_line_detail.dart';
 
 class DriverHomeViewModel extends GetxController {
   late Rx<LineDetail> _model;

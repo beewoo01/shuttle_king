@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/screen/main/tab/serch/vo/vo_bording_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/vo/vo_bording_location.dart';
 
 class BoardingLocationItemWidget extends StatefulWidget {
   const BoardingLocationItemWidget(

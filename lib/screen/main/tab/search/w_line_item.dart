@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'vo/vo_search_line.dart';
 
 class LineItem extends StatelessWidget {
-  final SearchLine line;
+  final SearchLineVO line;
 
   const LineItem(this.line, {super.key});
 

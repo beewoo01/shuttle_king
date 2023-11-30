@@ -2,7 +2,7 @@ import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/screen/main/tab/favorite/f_favorite.dart';
 import 'package:shuttle_king/screen/main/tab/home/f_home.dart';
 import 'package:shuttle_king/screen/main/tab/my/f_my_info.dart';
-import 'package:shuttle_king/screen/main/tab/serch/f_search.dart';
+import 'package:shuttle_king/screen/main/tab/search/f_search.dart';
 import 'package:flutter/material.dart';
 
 import 'news/f_news.dart';

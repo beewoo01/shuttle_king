@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/add/vm_add_boarding_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/add/vm_add_boarding_location.dart';
 
 class BoardingLocationMapWidget extends StatefulWidget {
   const BoardingLocationMapWidget(

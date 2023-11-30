@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiver/check.dart';
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/s_setting_operation.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/vm_apply_line.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/s_setting_operation.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/vm_apply_line.dart';
 
 import 'w_boarding_location_item.dart';
 

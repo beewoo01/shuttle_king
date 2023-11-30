@@ -1,9 +1,9 @@
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
-import 'package:shuttle_king/screen/main/tab/serch/vm_search.dart';
-import 'package:shuttle_king/screen/main/tab/serch/w_input_search_info.dart';
-import 'package:shuttle_king/screen/main/tab/serch/w_search_list.dart';
+import 'package:shuttle_king/screen/main/tab/search/vm_search.dart';
+import 'package:shuttle_king/screen/main/tab/search/w_input_search_info.dart';
+import 'package:shuttle_king/screen/main/tab/search/w_search_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

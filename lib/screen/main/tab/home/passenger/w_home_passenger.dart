@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shuttle_king/common/data/singleton.dart';
 import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
 import 'package:shuttle_king/screen/main/map/w_default_map.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/search/s_search_line.dart';
 import 'package:shuttle_king/screen/main/tab/home/passenger/vm_home_passenger.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -78,7 +79,7 @@ class _HomePassengerState extends State<HomePassenger> {
                   borderRadius: BorderRadius.all(Radius.circular(30.0))),
               backgroundColor: AppColors.mainGreenColor,
               onPressed: () {
-                //Get.to(const MyLines());
+                // Get.to(const SearchLine());
               },
               child: const Icon(
                 Icons.menu,

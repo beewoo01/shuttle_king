@@ -8,7 +8,7 @@ import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:shuttle_king/common/widget/w_height_and_width.dart';
 import 'package:shuttle_king/screen/dialog/d_alarm.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_textfield_with_sub_text.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/w_textfield_with_sub_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MyInfo extends StatefulWidget {

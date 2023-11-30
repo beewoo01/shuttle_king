@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/s_apply_line_join.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/s_apply_line_join.dart';
 
 import '../../../../../../common/common.dart';
 

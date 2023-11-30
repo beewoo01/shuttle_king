@@ -9,7 +9,7 @@ import 'package:shuttle_king/screen/main/widget/w_build_address_location.dart';
 class LineDetailInfo extends StatelessWidget {
   const LineDetailInfo({super.key, required this.line, });
   
-  final MyLine line;
+  final MyLineVO line;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class LineDetailInfo extends StatelessWidget {
                   title: "남은자리수 ",
                   content:
                   ": ${line.line_capacity - line.current_passangers_count}"),
-            ],
+            ],은
           ),
 
           height10,

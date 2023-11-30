@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:shuttle_king/common/widget/w_build_text.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/add/s_add_boarding_location.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/vm_apply_line.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/add/s_add_boarding_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/vm_apply_line.dart';
 
 import '../../../../../../common/common.dart';
 import 'operation/s_setting_operation.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/vm_setting_operation.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/vm_setting_operation.dart';
 
 import '../../../../../../../common/common.dart';
 import 'w_setting_operation_item.dart';

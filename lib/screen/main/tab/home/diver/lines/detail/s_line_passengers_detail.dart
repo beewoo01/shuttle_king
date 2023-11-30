@@ -13,7 +13,7 @@ import 'w_passengers_list.dart';
 class LinePassengersDetail extends StatefulWidget {
   const LinePassengersDetail({super.key, required this.line});
 
-  final MyLine line;
+  final MyLineVO line;
 
   @override
   State<LinePassengersDetail> createState() => _LinePassengersDetailState();

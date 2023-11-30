@@ -8,10 +8,10 @@ import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:shuttle_king/common/widget/w_build_text.dart';
 import 'package:shuttle_king/common/widget/w_height_and_width.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/vm_setting_operation.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_setting_week_of_day.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_textfield_with_sub_text.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/w_timer_picker.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/vm_setting_operation.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/w_setting_week_of_day.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/w_textfield_with_sub_text.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/w_timer_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SettingOperation extends StatefulWidget {

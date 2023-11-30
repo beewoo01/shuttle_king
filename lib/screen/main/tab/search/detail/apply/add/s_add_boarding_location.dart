@@ -4,8 +4,8 @@ import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/screen/dialog/d_alarm.dart';
 import 'package:shuttle_king/screen/dialog/d_next_or_cancel.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/add/vm_add_boarding_location.dart';
-import 'package:shuttle_king/screen/main/tab/serch/detail/apply/operation/s_setting_operation.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/add/vm_add_boarding_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/s_setting_operation.dart';
 
 import 'w_boarding_location_map.dart';
 
