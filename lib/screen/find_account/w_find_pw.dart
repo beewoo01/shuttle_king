@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
@@ -56,8 +57,11 @@ class FindPwWidget extends StatelessWidget {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return const Dialog(
-                    child: SimpleAlarmDialog(title: "비밀번호는 000 입니다."),
+                  return Dialog(
+                    child: SimpleAlarmDialog(title: "비밀번호는 11111111 입니다.", callback: () {
+
+                      Get.back();
+                    },),
                   );
                 });
           },

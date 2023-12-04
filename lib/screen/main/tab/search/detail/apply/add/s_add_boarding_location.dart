@@ -65,8 +65,11 @@ class _AddBoardingLocationState extends State<AddBoardingLocation> {
                         return Dialog(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0)),
-                          child: const SimpleAlarmDialog(
+                          child: SimpleAlarmDialog(
                             title: "출발, 도착 위치를 지정해 주세요.",
+                            callback: () {
+
+                            },
                           ),
                         );
                       });
@@ -98,7 +101,9 @@ class _AddBoardingLocationState extends State<AddBoardingLocation> {
                 },
                 confirmCallback: () {
                   Get.back();
-                  Get.off(() => SettingOperation(lineIdx: widget.lineIdx,));
+                  Get.off(() => SettingOperation(
+                        lineIdx: widget.lineIdx,
+                      ));
                 }),
           );
         });

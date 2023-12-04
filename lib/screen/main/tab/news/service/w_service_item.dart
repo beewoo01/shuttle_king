@@ -56,7 +56,7 @@ class _ServiceItemState extends State<ServiceItem> {
                 visible: widget.isClicked,
                 child: Container(
                   width: double.infinity,
-                  color: AppColors.brightGrey,
+                  color: AppColors.defaultBackgroundGreyColor,
                   child: widget.model.content.text
                       .make()
                       .pSymmetric(h: 10, v: 10),

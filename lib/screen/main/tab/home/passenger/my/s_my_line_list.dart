@@ -8,10 +8,9 @@ import 'package:shuttle_king/screen/main/tab/home/passenger/my/w_my_line_list_it
 class MyLineList extends StatelessWidget {
   const MyLineList({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
+    print("MyLineList build");
     MyLineListViewModel viewModel = Get.put(MyLineListViewModel());
     viewModel.getMyLineList();
 
@@ -23,7 +22,11 @@ class MyLineList extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ...viewModel.myLineList.map((element) => MyLineListItem(element))
+            ...viewModel.myLineList.map((element) => GestureDetector(
+                onTap: () {
+
+                },
+                child: MyLineListItem(model: element).pSymmetric(h: 20, v: 10)))
           ],
         ),
       ),

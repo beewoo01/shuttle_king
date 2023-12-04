@@ -8,8 +8,8 @@ class HomePassengerViewModel extends GetxController {
   PassengerLineSimpleInfoVO? get getModel => _model.value;
 
   void getPassengerLineInfo(int accountIdx) {
-    _model = null.obs;
-    /*_model = PassengerLineSimpleInfoVO(
+    //_model = null.obs;
+    _model = PassengerLineSimpleInfoVO(
       startTime : "10:00",
       endTime : "11:00",
       startAddress : "사상구 사상로 10",
@@ -20,7 +20,7 @@ class HomePassengerViewModel extends GetxController {
       startLongitude : 128.9843348,
       endLatitude : 35.17473196562537,
       endLongitude : 128.9847820037923,
-    ).obs;*/
+    ).obs;
   }
 
 }

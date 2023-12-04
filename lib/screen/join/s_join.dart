@@ -1,12 +1,13 @@
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/util/e_user_type.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
+import 'package:shuttle_king/screen/dialog/d_alarm.dart';
 import 'package:shuttle_king/screen/join/s_join_resiste_licens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 class JoinScreen extends StatefulWidget {
   const JoinScreen({super.key, required this.userType});
@@ -80,75 +81,95 @@ class _JoinScreenState extends State<JoinScreen> {
             height10,
             TextField(
               keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly
-              ],
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: TextFieldInputDecoration()
                   .getDefaultInputDecoration("'-' 제외하고 숫자만 입력"),
             ),
-
             Visibility(
                 visible: widget.userType == UserType.DRIVER,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     height20,
-                    "차량종류".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
+                    "차량종류"
+                        .text
+                        .black
+                        .size(AppSizes.textFieldTitleSize)
+                        .bold
+                        .make(),
                     height10,
                     TextField(
                       keyboardType: TextInputType.text,
                       decoration: TextFieldInputDecoration()
                           .getDefaultInputDecoration("차량종류를 입력해주세요."),
                     ),
-
                     height20,
-                    "차량번호".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
+                    "차량번호"
+                        .text
+                        .black
+                        .size(AppSizes.textFieldTitleSize)
+                        .bold
+                        .make(),
                     height10,
                     TextField(
                       keyboardType: TextInputType.text,
                       decoration: TextFieldInputDecoration()
                           .getDefaultInputDecoration("차량번호를 입력해주세요."),
                     ),
-
                     height20,
-                    "계좌번호".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
+                    "계좌번호"
+                        .text
+                        .black
+                        .size(AppSizes.textFieldTitleSize)
+                        .bold
+                        .make(),
                     height10,
                     TextField(
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: TextFieldInputDecoration()
                           .getDefaultInputDecoration("계좌번호를 입력해주세요."),
                     ),
-
-
                     height20,
-                    "은행명".text.black.size(AppSizes.textFieldTitleSize).bold.make(),
+                    "은행명"
+                        .text
+                        .black
+                        .size(AppSizes.textFieldTitleSize)
+                        .bold
+                        .make(),
                     height10,
                     TextField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.text,
                       decoration: TextFieldInputDecoration()
                           .getDefaultInputDecoration("은행명을 입력해주세요."),
                     ),
-
                   ],
                 )),
-
             height20,
             DefaultButtonWidget(
               title: "가입하기",
               callback: () {
+                if (widget.userType == UserType.DRIVER) {
+                  Get.off(() => const JoinRegistrationLicense());
+                } else {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return Dialog(
+                          child: SimpleAlarmDialog(
+                            title: "회원가입을 성공하셨습니다.",
+                            callback: () {
+                              print("callback");
 
-                if(widget.userType == UserType.DRIVER) {
-                  Get.to(const JoinRegistrationLicense());
+                              Get.back();
+                            },
+                          ),
+                        );
+                      });
                 }
-                ///TODO Join
               },
             ),
-
             height30,
-
           ],
         ).pSymmetric(h: AppSizes.defaultPaddingHorizontalSize),
       ),

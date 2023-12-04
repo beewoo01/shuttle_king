@@ -48,10 +48,12 @@ class News extends StatelessWidget {
                         },
                       ).pSymmetric(v: 10),
                     ),
+
                   NewsPage.event => Event(callback: (EventVO eventVO) {
                     viewModel.setSelectedEventDetailItem(eventVO);
                     viewModel.setCurrentPosition(NewsPage.eventDetail);
                   },).pSymmetric(v: 10),
+
                   NewsPage.service => Container(
                       decoration: BoxDecoration(
                           color: Colors.white,

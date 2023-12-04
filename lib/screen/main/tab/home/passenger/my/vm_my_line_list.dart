@@ -16,5 +16,8 @@ class MyLineListViewModel extends GetxController {
               capacity: i+2,
               passengersCount: i));
     }
+
+    myLineList.addAll(list);
+
   }
 }

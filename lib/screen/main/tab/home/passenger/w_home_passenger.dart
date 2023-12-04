@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shuttle_king/common/data/singleton.dart';
 import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
 import 'package:shuttle_king/screen/main/map/w_default_map.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/my/s_my_line_list.dart';
 import 'package:shuttle_king/screen/main/tab/home/passenger/search/s_search_line.dart';
 import 'package:shuttle_king/screen/main/tab/home/passenger/vm_home_passenger.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -63,12 +64,18 @@ class _HomePassengerState extends State<HomePassenger> {
                           longitude: viewModel.getModel?.endLongitude ?? 0)
                     ]),
           SlidingUpPanel(
+            ///TODO viewModel.getModel Locate
             panel: viewModel.getModel == null
-                ? const HomePassengerSearchPanel().pSymmetric(h: 20, v: 15)
+                ? HomePassengerSearchPanel(
+                    callback: () {
+                      Get.to(const SearchLine());
+                      //Get.to(const MyLineList());
+                    },
+                  ).pSymmetric(h: 20, v: 15)
                 : const HomePassengerPanel().pSymmetric(h: 20),
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-            maxHeight: viewModel.getModel == null? 300 : 250,
+            maxHeight: viewModel.getModel == null ? 300 : 250,
           ),
           Positioned(
             right: 20,
@@ -79,7 +86,7 @@ class _HomePassengerState extends State<HomePassenger> {
                   borderRadius: BorderRadius.all(Radius.circular(30.0))),
               backgroundColor: AppColors.mainGreenColor,
               onPressed: () {
-                // Get.to(const SearchLine());
+                Get.to(const MyLineList());
               },
               child: const Icon(
                 Icons.menu,

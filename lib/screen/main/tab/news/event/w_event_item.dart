@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/screen/main/tab/news/event/vm_event.dart';
+import 'package:shuttle_king/common/widget/w_network_image.dart';
 import 'package:shuttle_king/screen/main/tab/news/event/vo_event.dart';
 
 class EventItem extends StatelessWidget {
@@ -25,11 +24,17 @@ class EventItem extends StatelessWidget {
           height10,
           Expanded(
             child: Container(
+              width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.purple,
+                color: AppColors.defaultBackgroundGreyColor,
                 border: Border.all(color: AppColors.borderGrey, width: 0.5),
                 borderRadius: BorderRadius.circular(20),
               ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                  child: NetworkImageWidget(
+                imageUrl: eventVO.eventImageUrl,
+              )),
             ),
           ),
           height10,
@@ -45,7 +50,8 @@ class EventItem extends StatelessWidget {
                     .text
                     .white
                     .size(13)
-                    .make().pSymmetric(h: 10, v: 4),
+                    .make()
+                    .pSymmetric(h: 10, v: 4),
               ).pSymmetric(),
               width10,
               "${eventVO.startDate} ~ ${eventVO.endDate}".text.size(13).make(),

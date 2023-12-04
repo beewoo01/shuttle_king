@@ -50,7 +50,7 @@ class MyLineListItem extends StatelessWidget {
           BuildSubLineText(title: "남은자리수 ", content: ": ${model.capacity - model.passengersCount}"),
 
         ],
-      ),
+      ).pSymmetric(h: 15, v: 10),
     );
   }
 

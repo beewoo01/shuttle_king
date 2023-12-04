@@ -67,8 +67,11 @@ class _MyInfoState extends State<MyInfo> {
                         return Dialog(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0)),
-                          child: const SimpleAlarmDialog(
+                          child: SimpleAlarmDialog(
                             title: "수정 완료되었습니다.",
+                            callback: () {
+
+                            },
                           ),
                         );
                       });

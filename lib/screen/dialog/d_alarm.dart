@@ -9,10 +9,12 @@ class SimpleAlarmDialog extends StatelessWidget {
     super.key,
     required this.title,
     this.buttonText = "확인",
+    required this.callback,
   });
 
   final String title;
   final String buttonText;
+  final VoidCallback callback;
 
   double get dialogContainerSize => 250;
 
@@ -35,6 +37,7 @@ class SimpleAlarmDialog extends StatelessWidget {
             title: buttonText,
             callback: () {
               Get.back();
+              callback();
             },
           ),
           height10,

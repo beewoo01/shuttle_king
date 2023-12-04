@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class FindIdWidget extends StatelessWidget {
         TextField(
           keyboardType: TextInputType.emailAddress,
           decoration: TextFieldInputDecoration()
-              .getDefaultInputDecoration("계좌번호를 입력해주세요."),
+              .getDefaultInputDecoration("이메일을 입력해주세요."),
         ),
         height20,
         "이름".text.black.size(defaultTextSize).bold.make(),
@@ -49,8 +50,13 @@ class FindIdWidget extends StatelessWidget {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return const Dialog(
-                      child: SimpleAlarmDialog(title: "아이디는 000 입니다."));
+                  return Dialog(
+                      child: SimpleAlarmDialog(
+                    title: "아이디는 test 입니다.",
+                    callback: () {
+                      Get.back();
+                    },
+                  ));
                 });
           },
         ),

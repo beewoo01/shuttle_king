@@ -53,7 +53,7 @@ class LineDetailInfo extends StatelessWidget {
                   title: "남은자리수 ",
                   content:
                   ": ${line.line_capacity - line.current_passangers_count}"),
-            ],은
+            ],
           ),
 
           height10,

@@ -26,63 +26,65 @@ class _FindAccountInfoScreenState extends State<FindAccountInfoScreen> {
       appBar: CustomAppbar().createAppbar("계정찾기", () {
         Get.back();
       }),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          height20,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //viewModel.isFindingIdValue?
-              Expanded(
-                child: Obx(() => TextButton(
-                    onPressed: () {
-                      viewModel.setFindingState(true);
-                    },
-                    style: viewModel.isFindingId.value
-                        ? buildLineButtonStyle()
-                        : buildFullGreyButtonStyle(),
-                    child: "아이디찾기"
-                        .text
-                        .bold
-                        .color(viewModel.isFindingId.value
-                            ? Colors.black
-                            : AppColors.deepGreyColor)
-                        .make()
-                        .pSymmetric(v: 10))),
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            height20,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //viewModel.isFindingIdValue?
+                Expanded(
+                  child: Obx(() => TextButton(
+                      onPressed: () {
+                        viewModel.setFindingState(true);
+                      },
+                      style: viewModel.isFindingId.value
+                          ? buildLineButtonStyle()
+                          : buildFullGreyButtonStyle(),
+                      child: "아이디찾기"
+                          .text
+                          .bold
+                          .color(viewModel.isFindingId.value
+                              ? Colors.black
+                              : AppColors.deepGreyColor)
+                          .make()
+                          .pSymmetric(v: 10))),
+                ),
 
-              Expanded(
-                child: Obx(() => TextButton(
-                    onPressed: () {
-                      viewModel.setFindingState(false);
-                    },
-                    style: !viewModel.isFindingId.value
-                        ? buildLineButtonStyle()
-                        : buildFullGreyButtonStyle(),
-                    child: "비밀번호찾기"
-                        .text
-                        .bold
-                        .color(!viewModel.isFindingId.value
-                            ? Colors.black
-                            : AppColors.deepGreyColor)
-                        .make()
-                        .pSymmetric(v: 10))),
-              )
-            ],
-          ),
-          height20,
-          ///////////
-          Obx(
-            () => viewModel.isFindingIdValue
-                ? const FindIdWidget()
-                : const FindPwWidget(),
-          ),
+                Expanded(
+                  child: Obx(() => TextButton(
+                      onPressed: () {
+                        viewModel.setFindingState(false);
+                      },
+                      style: !viewModel.isFindingId.value
+                          ? buildLineButtonStyle()
+                          : buildFullGreyButtonStyle(),
+                      child: "비밀번호찾기"
+                          .text
+                          .bold
+                          .color(!viewModel.isFindingId.value
+                              ? Colors.black
+                              : AppColors.deepGreyColor)
+                          .make()
+                          .pSymmetric(v: 10))),
+                )
+              ],
+            ),
+            height20,
+            ///////////
+            Obx(
+              () => viewModel.isFindingIdValue
+                  ? const FindIdWidget()
+                  : const FindPwWidget(),
+            ),
 
-          ///////////
-          height30,
-        ],
-      ).pSymmetric(h: AppSizes.defaultPaddingHorizontalSize),
+            ///////////
+            height30,
+          ],
+        ).pSymmetric(h: AppSizes.defaultPaddingHorizontalSize),
+      ),
     );
   }
 
