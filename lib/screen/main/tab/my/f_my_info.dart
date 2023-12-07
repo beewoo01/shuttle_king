@@ -13,7 +13,6 @@ import 'package:velocity_x/velocity_x.dart';
 
 class MyInfo extends StatefulWidget {
   const MyInfo({super.key});
-
   @override
   State<MyInfo> createState() => _MyInfoState();
 }
@@ -23,8 +22,7 @@ class _MyInfoState extends State<MyInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.defaultBackgroundGreyColor,
-      appBar:
-          CustomAppbar().createAppbar("내 정보", isShowBackButton: false, () {}),
+      appBar: CustomAppbar().createAppbar("내 정보", isShowBackButton: false, () {}),
       body: SingleChildScrollView(
         child: Column(
           children: [

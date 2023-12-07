@@ -17,7 +17,6 @@ class HomePassengerSearchPanel extends StatelessWidget {
     return InputSearchInfoWidget(
       callback: () {
         print("InputSearchInfoWidget");
-        //Get.to(singleton.isDriver ?? false ? const MyLineList() : const SearchLine());
         callback();
 
       },
