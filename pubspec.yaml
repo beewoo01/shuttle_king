@@ -83,6 +83,9 @@ dependencies:
   #Image Picker
   image_picker: ^1.0.4
 
+  #SSH AND SFTP
+  ssh2: ^2.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

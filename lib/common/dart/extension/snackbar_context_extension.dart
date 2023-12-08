@@ -37,7 +37,7 @@ void _showSnackBarWithContext(BuildContext context, SnackBar snackbar) {
 class _SnackbarFactory {
   static SnackBar createSnackBar(BuildContext context, String message,
       {Color? bgColor, Widget? extraButton}) {
-    Color snackbarBgColor = bgColor ?? context.appColors.snackbarBgColor;
+    Color snackbarBgColor = bgColor ?? AppColors.mediumBlue;
     return SnackBar(
         elevation: 0,
         behavior: SnackBarBehavior.fixed,

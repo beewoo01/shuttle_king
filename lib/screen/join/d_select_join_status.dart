@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/util/e_user_type.dart';
 
@@ -34,6 +35,7 @@ class SelectJoinStatus extends StatelessWidget {
                       onPressed: () {
                         print("TextButton 승객");
                         //voidCallback();
+                        Get.back();
                         callback(UserType.PASSENGER);
                       },
                       style: ButtonStyle(
@@ -54,6 +56,7 @@ class SelectJoinStatus extends StatelessWidget {
                       child: TextButton(
                         onPressed: () {
                           print("TextButton 기사");
+                          Get.back();
                           callback(UserType.DRIVER);
                         },
                         style: ButtonStyle(
