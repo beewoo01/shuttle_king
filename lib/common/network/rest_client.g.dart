@@ -7,7 +7,8 @@ class _RestClient implements RestClient {
   }) {
     //baseUrl ??= 'http://192.168.0.137:8080/project';
     //baseUrl ??= 'http://codebrosdev.cafe24.com:8080/motocycle';
-    baseUrl ??= 'http://192.168.0.140:8080/project/';
+    //baseUrl ??= 'http://192.168.0.140:8080/project/';
+    baseUrl ??= 'http://192.168.35.253:8080/project/';
   }
 
   final Dio _dio;
@@ -198,13 +199,15 @@ class _RestClient implements RestClient {
 
   @override
   Future<List<NoticeDTO>?> getNotice() async {
-    print("getNotice");
+    print("getNotice1");
     final option = _createRequestOptionsSync(method: 'GET', path: "getNotice");
-    final result = await _dio.fetch<List<NoticeDTO>?>(_setStreamType<List<NoticeDTO>?>(option));
-    print("result is $result");
-    return result.data;
-  }
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
 
+    return result.data?.map((e) {
+      return NoticeDTO.fromJson(e);
+    }).toList();
+  }
 
 /*
   Future<List<SubCategoryDTO>?> selectSubCategory(int categoryIdx) async {
@@ -220,5 +223,4 @@ class _RestClient implements RestClient {
     return null;
   }
 */
-
 }

@@ -20,4 +20,9 @@ class NoticeVO extends NewsVO {
           "title": json['notice_title'],
           "content": json['notice_description'],
         });
+
+  @override
+  String toString() {
+    return "NoticeVO{idx :$idx, title: $title";
+  }
 }

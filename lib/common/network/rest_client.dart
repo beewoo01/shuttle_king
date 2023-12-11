@@ -7,7 +7,8 @@ import 'package:shuttle_king/screen/main/tab/news/notice/dto_notice.dart';
 
 part 'rest_client.g.dart';
 
-@RestApi(baseUrl: 'http://192.168.0.140:8080/project/')
+// @RestApi(baseUrl: 'http://192.168.0.140:8080/project/')
+@RestApi(baseUrl: 'http://192.168.35.253:8080/project/')
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 

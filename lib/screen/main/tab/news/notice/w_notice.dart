@@ -20,32 +20,44 @@ class Notice extends StatelessWidget {
     }*/
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          ...viewModel.noticeList.map((e) => GestureDetector(
-                onTap: () {
-                  print("viewModel.noticeList");
-                  callback(e);
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  width: double.infinity,
-                  child: Column(children: [
-                    height10,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        e.title.text.size(14).make(),
-                        e.noticeCreateTime.text.size(14).make()
-                      ],
-                    ).pSymmetric(h: 10),
-                    height20,
-                    const Line(color: AppColors.grey, height: 0.5,),
-                    height10,
-                  ]).pSymmetric(h: 10, ),
-                ),
-              ))
-        ],
+      child: Obx(() {
+        print("Notice Obx");
+        print(viewModel.noticeList.length);
+        print(viewModel.noticeList);
+          return Column(
+            children: [
+              ...viewModel.noticeList.map((e) {
+                print("viewModel.noticeList!! ${viewModel.noticeList.length}");
+                return GestureDetector(
+                  onTap: () {
+                    print("viewModel.noticeList");
+                    callback(e);
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Column(children: [
+                      height10,
+                      Container(
+                        width: 30,
+                        color: Colors.purple,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          e.title.text.size(14).make(),
+                          e.noticeCreateTime.text.size(14).make()
+                        ],
+                      ).pSymmetric(h: 10),
+                      height20,
+                      const Line(color: AppColors.grey, height: 0.5,),
+                      height10,
+                    ]).pSymmetric(h: 10,),
+                  ),
+                );
+              })
+            ],
+          );
+        }
       ),
     );
   }

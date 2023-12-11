@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/constants.dart';
 import 'package:shuttle_king/common/util/vm_base.dart';
+import 'package:shuttle_king/screen/main/tab/news/notice/dto_notice.dart';
 import 'package:shuttle_king/screen/main/tab/news/notice/vo_notice.dart';
 
 class NoticeViewModel extends BaseViewModel {
@@ -10,10 +11,12 @@ class NoticeViewModel extends BaseViewModel {
 
   void getNoticeList() {
     api.getNotice().then((value) {
-      print(value);
-      value?.map((e) => _noticeList.add(NoticeVO(
-          e.noticeIdx, e.noticeTitle, e.noticeDescription,
-          imgUrl: '', noticeCreateTime: e.noticeCreateTime)));
+      List<NoticeVO>? list = value
+          ?.map((e) => NoticeVO(e.noticeIdx, e.noticeTitle, e.noticeDescription,
+              imgUrl: '', noticeCreateTime: ''))
+          .toList();
+
+      _noticeList.value = list ?? [];
     });
   }
 
