@@ -29,6 +29,7 @@ class Notice extends StatelessWidget {
                 },
                 child: Container(
                   color: Colors.transparent,
+                  width: double.infinity,
                   child: Column(children: [
                     height10,
                     Row(

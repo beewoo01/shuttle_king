@@ -5,6 +5,7 @@ import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shuttle_king/screen/dialog/d_alarm.dart';
+import 'package:shuttle_king/screen/find_account/vm_find_account_info.dart';
 
 class FindPwWidget extends StatelessWidget {
   const FindPwWidget({super.key});
@@ -15,12 +16,15 @@ class FindPwWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FindAccountViewModel viewModel = Get.find<FindAccountViewModel>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         "아이디".text.black.size(defaultTextSize).bold.make(),
         height10,
         TextField(
+          controller: viewModel.idController,
           keyboardType: TextInputType.emailAddress,
           decoration: TextFieldInputDecoration()
               .getDefaultInputDecoration("아이디를 입력해 주세요."),
@@ -29,6 +33,7 @@ class FindPwWidget extends StatelessWidget {
         "이메일".text.black.size(defaultTextSize).bold.make(),
         height10,
         TextField(
+          controller: viewModel.emailController,
           keyboardType: TextInputType.emailAddress,
           decoration: TextFieldInputDecoration()
               .getDefaultInputDecoration("이메일을 입력해 주세요."),
@@ -37,6 +42,7 @@ class FindPwWidget extends StatelessWidget {
         "이름".text.black.size(defaultTextSize).bold.make(),
         height10,
         TextField(
+          controller: viewModel.nameController,
           keyboardType: TextInputType.name,
           decoration: TextFieldInputDecoration()
               .getDefaultInputDecoration("이름을 입력해 주세요."),
@@ -45,6 +51,7 @@ class FindPwWidget extends StatelessWidget {
         "전화번호".text.black.size(defaultTextSize).bold.make(),
         height10,
         TextField(
+          controller: viewModel.phoneController,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: TextFieldInputDecoration()
@@ -54,7 +61,8 @@ class FindPwWidget extends StatelessWidget {
         DefaultButtonWidget(
           title: "비밀번호찾기",
           callback: () {
-            showDialog(
+            viewModel.findPW();
+            /*showDialog(
                 context: context,
                 builder: (context) {
                   return Dialog(
@@ -63,7 +71,7 @@ class FindPwWidget extends StatelessWidget {
                       Get.back();
                     },),
                   );
-                });
+                });*/
           },
         ),
       ],

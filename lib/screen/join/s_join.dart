@@ -1,17 +1,13 @@
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/common/data/singleton.dart';
-import 'package:shuttle_king/common/network/rest_client.dart';
 import 'package:shuttle_king/common/util/e_user_type.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
 import 'package:shuttle_king/common/widget/util/text_editing_controller.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
-import 'package:shuttle_king/screen/dialog/d_alarm.dart';
-import 'package:shuttle_king/screen/join/s_join_resiste_licens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shuttle_king/screen/join/vm_join.dart';
 
 class JoinScreen extends StatefulWidget {
   const JoinScreen({super.key, required this.userType});
@@ -26,7 +22,7 @@ class _JoinScreenState extends State<JoinScreen> {
   //double get defaultTextSize => 18;
 
   //double get defaultPaddingHorizontalSize => 29;
-  late final api = RestClient(Dio());
+  //late final api = RestClient(Dio());
 
   late final idTextController = TaggedTextFieldController("아이디");
   late final emailTextController = TaggedTextFieldController("이메일");
@@ -41,6 +37,16 @@ class _JoinScreenState extends State<JoinScreen> {
   late final driverBankAccountNumberTextController =
       TaggedTextFieldController("계좌번호");
   late final driverBankNameTextController = TaggedTextFieldController("은행명");
+
+  late final JoinViewModel vm;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!Get.isRegistered<JoinViewModel>()) {
+      vm = Get.put(JoinViewModel());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -180,31 +186,6 @@ class _JoinScreenState extends State<JoinScreen> {
               callback: () {
                 if (widget.userType == UserType.DRIVER) {
                   _joinAccountDriver();
-
-                  /*Get.off(() => JoinRegistrationLicense(
-                        */ /*id: idTextController.text,
-                        email: emailTextController.text,
-                        password: passwordTextController.text,
-                        name: nameTextController.text,
-                        phone: phoneTextController.text,
-                        carType: driverCarTypeTextController.text,
-                        carNum: driverCarNumTextController.text,
-                        bankAccountNumber: driverBankAccountNumberTextController.text,
-                        bankName: driverBankNameTextController.text,*/ /*
-                    id: "testtt2",
-                    email: "testtt2@test.com",
-                    password: "1111",
-                    name: "testtt2",
-                    phone: "01099999999",
-                    carType: "테스트회원가입",
-                    carNum: "99테9999_2",
-                    bankAccountNumber: "9999-9999-9999_2",
-                    bankName: "테스트은행",
-
-
-
-
-                      ));*/
                 } else {
                   _join();
                 }
@@ -218,39 +199,44 @@ class _JoinScreenState extends State<JoinScreen> {
   }
 
   void _join() {
+    print("_join");
     String id = idTextController.text;
     String email = emailTextController.text;
     String password = passwordTextController.text;
     String name = nameTextController.text;
     String phone = phoneTextController.text;
 
-    api.joinAccount(id, email, password, name, phone).then((value) {
-      switch (value) {
-        case -1:
-          {
-            _showSnackbar("이미 등록된 아이디 입니다.");
-            break;
-          }
+    if (id.length < 4) {
+      _showSnackbar("아이디는 4자 이상입력해주세요.");
+      return;
+    }
 
-        case -2:
-          {
-            _showSnackbar("이미 등록된 이메일 입니다.");
-            break;
-          }
+    if (email.length < 5) {
+      _showSnackbar("이메일을 5자 이상으로 입력해주세요.");
+      return;
+    }
 
-        case 0:
-          {
-            _showSnackbar("회원가입에 실패하였습니다.");
-            break;
-          }
+    if (password.length < 4) {
+      _showSnackbar("비밀번호는 4자 이상으로 입력해주세요.");
+      return;
+    }
 
-        default:
-          {
-            _showDialog();
-            break;
-          }
-      }
-    });
+    if (password != passwordConfirmTextController.text) {
+      _showSnackbar("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    if (name.length < 2) {
+      _showSnackbar("이름을 정확히 입력해주세요.");
+      return;
+    }
+    print(phone.length);
+    if (phone.length < 11) {
+      _showSnackbar("휴대폰 번호를 정확히 입력해주세요.");
+      return;
+    }
+
+    vm.joinAccount(id, email, password, name, phone);
   }
 
   void _joinAccountDriver() {
@@ -288,7 +274,7 @@ class _JoinScreenState extends State<JoinScreen> {
       _showSnackbar("이름을 정확히 입력해주세요.");
       return;
     }
-    print(phone.length);
+
     if (phone.length < 11) {
       _showSnackbar("휴대폰 번호를 정확히 입력해주세요.");
       return;
@@ -310,84 +296,8 @@ class _JoinScreenState extends State<JoinScreen> {
       return;
     }
 
-    api
-        .joinDriverAccount(
-      id,
-      email,
-      password,
-      name,
-      phone,
-      carType,
-      carNum,
-      bankAccountNumber,
-      bankName,
-    )
-        .then((value) {
-      print("joinDriverAccount");
-      print(value);
-      print("value");
-
-      switch (value) {
-        case 0:
-        case -4:
-          {
-            _showSnackbar("회원가입에 실패하였습니다.");
-            break;
-          }
-
-        case -1:
-          {
-            _showSnackbar("이미 등록된 운전자 정보입니다.");
-            break;
-          }
-
-        case -2:
-          {
-            _showSnackbar("이미 등록된 아이디입니다.");
-            break;
-          }
-
-        case -3:
-          {
-            _showSnackbar("이미 등록된 이메일입니다.");
-            break;
-          }
-
-        default:
-          {
-            Singleton().accountIdx = value;
-
-            Get.off(() => JoinRegistrationLicense(
-                  id: id,
-                  email: email,
-                  password: password,
-                  name: name,
-                  phone: phone,
-                  carType: carType,
-                  carNum: carNum,
-                  bankAccountNumber: bankAccountNumber,
-                  bankName: bankName,
-                ));
-
-            break;
-          }
-      }
-    });
-  }
-
-  void _showDialog() {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return Dialog(
-            child: SimpleAlarmDialog(
-              title: "회원가입을 성공하셨습니다.",
-              callback: () {
-                Get.back();
-              },
-            ),
-          );
-        });
+    vm.joinDriverAccount(id, email, password, name, phone, carType, carNum,
+        bankAccountNumber, bankName);
   }
 
   void _showSnackbar(String title) {

@@ -4,4 +4,9 @@ class NewsVO {
   String content;
 
   NewsVO(this.idx, this.title, this.content);
+
+  NewsVO.fromJson(Map<String, dynamic> map)
+      : idx = map['idx'],
+        title = map['title'],
+        content = map['content'];
 }

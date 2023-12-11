@@ -165,4 +165,60 @@ class _RestClient implements RestClient {
 
     return result.data!;
   }
+
+  @override
+  Future<String?> findID(String email, String name, String phone) async {
+    final option =
+        _createRequestOptionsSync(method: 'POST', path: "findID", parameter: {
+      "email": email,
+      "name": name,
+      "phone": phone,
+    });
+
+    final result = await _dio.fetch<String?>(_setStreamType<String?>(option));
+
+    return result.data;
+  }
+
+  @override
+  Future<String?> findPW(
+      String id, String email, String name, String phone) async {
+    final option =
+        _createRequestOptionsSync(method: 'POST', path: "findPW", parameter: {
+      "id": id,
+      "email": email,
+      "name": name,
+      "phone": phone,
+    });
+
+    final result = await _dio.fetch<String?>(_setStreamType<String?>(option));
+
+    return result.data;
+  }
+
+  @override
+  Future<List<NoticeDTO>?> getNotice() async {
+    print("getNotice");
+    final option = _createRequestOptionsSync(method: 'GET', path: "getNotice");
+    final result = await _dio.fetch<List<NoticeDTO>?>(_setStreamType<List<NoticeDTO>?>(option));
+    print("result is $result");
+    return result.data;
+  }
+
+
+/*
+  Future<List<SubCategoryDTO>?> selectSubCategory(int categoryIdx) async {
+    Uri uri = Uri.parse('${BASE_URL}selectSubCategory')
+        .replace(queryParameters: {"category_idx": categoryIdx.toString()});
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      List responseJson = json.decode(response.body);
+      print('selectSubCategory responseJson $responseJson');
+      return responseJson.map((json) => SubCategoryDTO.fromJson(json)).toList();
+    } else {}
+
+    return null;
+  }
+*/
+
 }

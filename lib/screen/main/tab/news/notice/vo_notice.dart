@@ -11,4 +11,13 @@ class NoticeVO extends NewsVO {
     required this.imgUrl,
     required this.noticeCreateTime,
   });
+
+  NoticeVO.fromJson(Map<String, dynamic> json)
+      : imgUrl = json['notice_img_url'],
+        noticeCreateTime = json['notice_createtime'],
+        super.fromJson({
+          "idx": json['notice_idx'],
+          "title": json['notice_title'],
+          "content": json['notice_description'],
+        });
 }

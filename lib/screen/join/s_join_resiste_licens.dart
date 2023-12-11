@@ -1,34 +1,33 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/common/data/singleton.dart';
-import 'package:shuttle_king/common/network/rest_client.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:shuttle_king/screen/dialog/d_alarm.dart';
 import 'package:shuttle_king/screen/join/vm_join.dart';
 import 'package:ssh2/ssh2.dart';
 import 'package:path/path.dart' as path;
 
 class JoinRegistrationLicense extends StatefulWidget {
-  const JoinRegistrationLicense(
-      {super.key,
-      required this.id,
-      required this.email,
-      required this.password,
-      required this.name,
-      required this.phone,
-      required this.carType,
-      required this.carNum,
-      required this.bankAccountNumber,
-      required this.bankName});
+  const JoinRegistrationLicense({
+    super.key,
+    required this.accountIdx,
+    required this.id,
+    required this.email,
+    required this.password,
+    required this.name,
+    required this.phone,
+    required this.carType,
+    required this.carNum,
+    required this.bankAccountNumber,
+    required this.bankName,
+  });
 
+  final int accountIdx;
   final String id;
   final String email;
   final String password;
@@ -45,19 +44,9 @@ class JoinRegistrationLicense extends StatefulWidget {
 }
 
 class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
-
   XFile? _image; //이미지를 담을 변수 선언
   final ImagePicker picker = ImagePicker(); //ImagePicker 초기화
-  bool isLoading = false;
-  late final JoinViewModel vm;
-
-  @override
-  void initState() {
-    super.initState();
-    if(!Get.isRegistered<JoinViewModel>()){
-      vm = Get.put(JoinViewModel());
-    }
-  }
+  late final JoinViewModel vm = Get.put(JoinViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -134,30 +123,30 @@ class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
               DefaultButtonWidget(
                   title: "회원가입",
                   callback: () {
-                    if (isLoading) {
+                    if (vm.getLoading()) {
                       return;
                     }
 
                     if (_image?.path != null) {
-                      isLoading = true;
+                      vm.setLoading(true);
                       print("DefaultButtonWidget");
-                      changeImageName("license");
+                      changeImageName("license${widget.accountIdx}");
                     } else {
                       _showSnackbar("면허증 사진을 등록해주세요.");
                     }
                   })
             ],
           ).pSymmetric(h: 29),
-          Visibility(
-            visible: isLoading,
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: AppColors.progressBackgroundColor,
-              alignment: Alignment.center,
-              child: const CircularProgressIndicator(),
-            ),
-          ),
+          Obx(() => Visibility(
+                visible: vm.getLoading(),
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: AppColors.progressBackgroundColor,
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator(),
+                ),
+              )),
         ],
       ),
     );
@@ -182,117 +171,6 @@ class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
     }
   }
 
-  void _joinDriver() {
-    if (Singleton().accountIdx == null) {
-      return;
-    }
-
-    api.joinDriver(
-      Singleton().accountIdx!,
-      widget.carType,
-      widget.carNum,
-      widget.bankAccountNumber,
-      widget.bankName,
-      _image!.name,
-    )
-        .then((value) {
-      if (value > 0) {
-        _showDialog();
-      } else {
-        print(value);
-        _showSnackbar("운전자 등록에 실패하였습니다");
-      }
-    });
-  }
-
-  void _join() {
-    if (_image == null) {
-      _showSnackbar("운전면허를 등록해주세요.");
-      return;
-    }
-
-    api
-        .joinDriverAccount(
-      widget.id,
-      widget.email,
-      widget.password,
-      widget.name,
-      widget.phone,
-      widget.carType,
-      widget.carNum,
-      widget.bankAccountNumber,
-      widget.bankName,
-    )
-        .then((value) {
-      print("joinDriverAccount");
-      print(value);
-      print("value");
-
-      switch (value) {
-        case 0:
-        case -4:
-          {
-            _showSnackbar("회원가입에 실패하였습니다.");
-            break;
-          }
-
-        /*case -5:
-          {
-            _showSnackbar("운전자 등록에 실패하였습니다.");
-            break;
-          }*/
-
-        case -1:
-          {
-            _showSnackbar("이미 등록된 운전자 정보입니다.");
-            break;
-          }
-
-        case -2:
-          {
-            _showSnackbar("이미 등록된 아이디입니다.");
-            break;
-          }
-
-        case -3:
-          {
-            _showSnackbar("이미 등록된 이메일입니다.");
-            break;
-          }
-
-        default:
-          {
-            if (_image?.path != null) {
-              Singleton().accountIdx = value;
-              changeImageName("license");
-            }
-
-            //_showDialog();
-            break;
-          }
-      }
-    });
-  }
-
-  void _showDialog() {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0)),
-            child: SimpleAlarmDialog(
-              title: "관리자 승인 후\n이용이 가능합니다.",
-              callback: () {
-                Get.back();
-              },
-            ),
-          );
-        }).then((value) {
-      Get.back();
-    });
-  }
-
   void _showSnackbar(String title) {
     context.showSnackbar(title,
         extraButton: Tap(
@@ -312,16 +190,6 @@ class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
   }
 
   Future<void> sendSFTP(String filePath) async {
-    if (Singleton().accountIdx == null) {
-      _showSnackbar("운전면허 등록에 실패했습니다.");
-      return;
-    }
-
-    print("Singleton().accountIdx");
-    print(Singleton().accountIdx);
-
-    print("sendSFTP");
-
     var client = SSHClient(
       host: "110.10.174.243",
       port: 22,
@@ -335,8 +203,10 @@ class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
         //client.execute(cmd)
         if (result == 'sftp_connected') {
           String defaultPath =
-              "/var/lib/tomcat9/webapps/media/shuttleking/license/${Singleton().accountIdx}";
+              "/var/lib/tomcat9/webapps/media/shuttleking/license/${widget.accountIdx}";
+
           String? mkDir = await client.sftpMkdir(defaultPath);
+
           if (mkDir.isEmptyOrNull) {
             _showSnackbar("운전면허 등록에 실패했습니다.");
             await client.disconnect();
@@ -355,7 +225,8 @@ class _JoinRegistrationLicenseState extends State<JoinRegistrationLicense> {
 
             await client.disconnect();
 
-            _joinDriver();
+            vm.joinDriver(widget.accountIdx, widget.carType, widget.carNum,
+                widget.bankAccountNumber, widget.bankName, _image!.name);
           } else {
             await client.disconnect();
             _showSnackbar("운전면허 등록에 실패했습니다.");
