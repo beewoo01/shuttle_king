@@ -16,15 +16,17 @@ class Event extends StatelessWidget {
     final EventViewModel viewModel = Get.put(EventViewModel());
     viewModel.getEventList();
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          ...viewModel.eventList.map((e) => GestureDetector(
-              onTap: () {
-                callback(e);
-              },
-              child: EventItem(eventVO: e)))
-        ],
-      ),
+      child: Obx(() {
+        return Column(
+          children: [
+            ...viewModel.eventList.map((e) => GestureDetector(
+                onTap: () {
+                  callback(e);
+                },
+                child: EventItem(eventVO: e)))
+          ],
+        );
+      }),
     );
   }
 }

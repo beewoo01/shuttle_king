@@ -20,15 +20,16 @@ class MyLineList extends StatelessWidget {
       }),
       backgroundColor: AppColors.defaultBackgroundGreyColor,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...viewModel.myLineList.map((element) => GestureDetector(
-                onTap: () {
-
-                },
-                child: MyLineListItem(model: element).pSymmetric(h: 20, v: 10)))
-          ],
-        ),
+        child: Obx(() {
+          return Column(
+            children: [
+              ...viewModel.myLineList.map((element) => GestureDetector(
+                  onTap: () {},
+                  child:
+                      MyLineListItem(model: element).pSymmetric(h: 20, v: 10)))
+            ],
+          );
+        }),
       ),
     );
   }

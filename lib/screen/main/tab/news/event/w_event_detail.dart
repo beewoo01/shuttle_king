@@ -32,7 +32,7 @@ class EventDetail extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: AppColors.mainGreenColor,
+                color: eventVO.eventStatus == 0 ? AppColors.mainGreenColor : Colors.black,
               ),
               child: (eventVO.eventStatus == 0 ? "진행중" : "종료됨")
                   .text
@@ -56,7 +56,7 @@ class EventDetail extends StatelessWidget {
           child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: NetworkImageWidget(
-                imageUrl: eventVO.eventImageUrl,
+                imageUrl: "${baseImagePath}event/${eventVO.eventImageUrl}",
               )),
         ),
         height30,

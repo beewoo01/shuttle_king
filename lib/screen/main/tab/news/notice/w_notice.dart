@@ -14,10 +14,6 @@ class Notice extends StatelessWidget {
   Widget build(BuildContext context) {
     late final NoticeViewModel viewModel = Get.put(NoticeViewModel());
     viewModel.getNoticeList();
-    /*if (!Get.isRegistered<NoticeViewModel>()) {
-      viewModel = Get.put(NoticeViewModel());
-      viewModel.getNoticeList();
-    }*/
 
     return SingleChildScrollView(
       child: Obx(() {
@@ -27,20 +23,14 @@ class Notice extends StatelessWidget {
           return Column(
             children: [
               ...viewModel.noticeList.map((e) {
-                print("viewModel.noticeList!! ${viewModel.noticeList.length}");
                 return GestureDetector(
                   onTap: () {
-                    print("viewModel.noticeList");
                     callback(e);
                   },
                   child: Container(
                     color: Colors.transparent,
                     child: Column(children: [
                       height10,
-                      Container(
-                        width: 30,
-                        color: Colors.purple,
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

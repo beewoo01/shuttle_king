@@ -3,12 +3,18 @@ import 'dart:ffi';
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/dto/dto_marker_location.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/dto/dto_passenger_current_line.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/my/dto/dto_my_line.dart';
+import 'package:shuttle_king/screen/main/tab/news/event/dto_event.dart';
 import 'package:shuttle_king/screen/main/tab/news/notice/dto_notice.dart';
+import 'package:shuttle_king/screen/main/tab/news/service/dto_service.dart';
 
 part 'rest_client.g.dart';
 
-// @RestApi(baseUrl: 'http://192.168.0.140:8080/project/')
-@RestApi(baseUrl: 'http://192.168.35.253:8080/project/')
+@RestApi(baseUrl: 'http://192.168.0.140:8080/project/')
+// @RestApi(baseUrl: 'http://192.168.35.253:8080/project/')
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
@@ -49,18 +55,27 @@ abstract class RestClient {
 
   @POST("findID")
   Future<String?> findID(
-      @Body() String email,
-      @Body() String name,
-      @Body() String phone);
+      @Body() String email, @Body() String name, @Body() String phone);
 
   @POST("findPW")
-  Future<String?> findPW(
-      @Body() String id,
-      @Body() String email,
-      @Body() String name,
-      @Body() String phone);
+  Future<String?> findPW(@Body() String id, @Body() String email,
+      @Body() String name, @Body() String phone);
 
   @GET("getNotice")
   Future<List<NoticeDTO>?> getNotice();
 
+  @GET("getEvent")
+  Future<List<EventDTO>?> getEvent();
+
+  @GET("getMyQnA")
+  Future<List<ServiceDTO>?> getMyQnA(@Body() int accountIdx);
+
+  @GET("passengerHome")
+  Future<PassengerCurrentLineDTO?> passengerHome(@Body() int accountIdx);
+
+  @GET("getMarkers")
+  Future<List<MarkerLocationDTO>?> getMarkers(@Body() int lineIdx);
+
+  @GET("getMyLines")
+  Future<List<MyLineDTO>?> getMyLines(@Body() int accountIdx);
 }

@@ -2,6 +2,8 @@ export 'theme/color/abs_theme_colors.dart';
 export 'theme/shadows/abs_theme_shadows.dart';
 
 const basePath = 'assets/image';
+const baseImagePath = 'http://codebrosdev.cafe24.com:8080/media/shuttleking/';
+
 /*
 const SAMPLE_NETWORK_IMAGE_PATH1 = 'https://picsum.photos/200/300';
 const SAMPLE_NETWORK_IMAGE_PATH2 = 'https://picsum.photos/id/237/200/300';

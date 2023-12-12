@@ -39,7 +39,6 @@ class _HomeDriverState extends State<HomeDriver> {
             locationModelList: viewModel.boardingLocationList
                 .map((e) => LocationModel(
               idx: e.line_location_idx,
-              title: e.line_location_address,
               position: e.line_location_boarding_number,
               latitude: e.line_location_latitude,
               longitude: e.line_location_longitude,

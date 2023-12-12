@@ -4,10 +4,11 @@ class NoticeDTO {
   late final String noticeDescription;
   late final String noticeCreateTime;
   late final String noticeUpdateTime;
+  late final String noticeImgUrl;
 
   NoticeDTO(
       {required this.noticeIdx, required this.noticeTitle, required this.noticeDescription,
-        required this.noticeCreateTime, required this.noticeUpdateTime});
+        required this.noticeCreateTime, required this.noticeUpdateTime, required this.noticeImgUrl});
 
   factory NoticeDTO.fromJson(Map<String, dynamic> json,) {
     return NoticeDTO(
@@ -16,6 +17,7 @@ class NoticeDTO {
       noticeDescription: json['notice_description'],
       noticeCreateTime: json['notice_createtime'],
       noticeUpdateTime: json['notice_updatetime'],
+      noticeImgUrl: json['notice_img_url'],
     );
   }
 

@@ -37,7 +37,7 @@ class NoticeDetail extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: NetworkImageWidget(
-              imageUrl: noticeVO.imgUrl,
+              imageUrl: "$baseImagePath/notice/${noticeVO.imgUrl}",
             ),
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shuttle_king/screen/main/tab/home/passenger/my/vo_my_line.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/my/vo/vo_my_line.dart';
 import 'package:shuttle_king/screen/main/widget/build_sub_text_line.dart';
 import 'package:shuttle_king/screen/main/widget/w_build_address_location.dart';
 
@@ -47,7 +47,7 @@ class MyLineListItem extends StatelessWidget {
           height20,
 
           BuildSubLineText(title: "운행시간 ", content: ": ${model.startTime}"),
-          BuildSubLineText(title: "남은자리수 ", content: ": ${model.capacity - model.passengersCount}"),
+          BuildSubLineText(title: "남은자리수 ", content: ": ${model.passengersCount}"),
 
         ],
       ).pSymmetric(h: 15, v: 10),

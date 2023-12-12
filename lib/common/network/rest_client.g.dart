@@ -7,8 +7,8 @@ class _RestClient implements RestClient {
   }) {
     //baseUrl ??= 'http://192.168.0.137:8080/project';
     //baseUrl ??= 'http://codebrosdev.cafe24.com:8080/motocycle';
-    //baseUrl ??= 'http://192.168.0.140:8080/project/';
-    baseUrl ??= 'http://192.168.35.253:8080/project/';
+    baseUrl ??= 'http://192.168.0.140:8080/project/';
+    // baseUrl ??= 'http://192.168.35.253:8080/project/';
   }
 
   final Dio _dio;
@@ -207,6 +207,70 @@ class _RestClient implements RestClient {
     return result.data?.map((e) {
       return NoticeDTO.fromJson(e);
     }).toList();
+  }
+
+  @override
+  Future<List<EventDTO>?> getEvent() async {
+    final option = _createRequestOptionsSync(method: 'GET', path: "getEvent");
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+
+    return result.data?.map((e) {
+      return EventDTO.fromJson(e);
+    }).toList();
+  }
+
+  @override
+  Future<List<ServiceDTO>?> getMyQnA(int accountIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getMyQnA",
+        parameter: {"account_idx": accountIdx});
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    print("getMyQnA");
+    print("accountIdx $accountIdx");
+    print("result ${result.data}");
+    return result.data?.map((e) {
+      return ServiceDTO.fromJson(e);
+    }).toList();
+  }
+
+  @override
+  Future<PassengerCurrentLineDTO?> passengerHome(int accountIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "passengerHome",
+        parameter: {"account_idx": accountIdx});
+
+    final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
+    return PassengerCurrentLineDTO.fromJson(result.data);
+  }
+
+  @override
+  Future<List<MarkerLocationDTO>?> getMarkers(int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET', path: "getMarkers", parameter: {"line_idx": lineIdx});
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+
+    return result.data?.map((e) {
+      return MarkerLocationDTO.fromJson(e);
+    }).toList();
+  }
+
+  @override
+  Future<List<MyLineDTO>?> getMyLines(int accountIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getMyLines",
+        parameter: {"account_idx": accountIdx});
+
+    final result = await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+
+    return result.data?.map((e) => MyLineDTO.fromJson(e)).toList();
   }
 
 /*

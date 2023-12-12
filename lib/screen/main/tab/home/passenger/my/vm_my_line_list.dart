@@ -1,23 +1,32 @@
 import 'package:get/get.dart';
-import 'package:shuttle_king/screen/main/tab/home/passenger/my/vo_my_line.dart';
+import 'package:shuttle_king/common/data/singleton.dart';
+import 'package:shuttle_king/common/util/vm_base.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/my/vo/vo_my_line.dart';
 
-class MyLineListViewModel extends GetxController {
-  RxList<MyLineVO> myLineList = <MyLineVO>[].obs;
+class MyLineListViewModel extends BaseViewModel {
+  final RxList<MyLineVO> _myLineList = <MyLineVO>[].obs;
+
+  List<MyLineVO> get myLineList => _myLineList;
 
   void getMyLineList() {
-    List<MyLineVO> list = [];
-    for (int i = 0; i < 10; i++) {
-      list.add(
-          MyLineVO(lineIdx: i + 1,
-              driverPhoneNum: "010-234$i-254$i",
-              startAddress: "부산시 사상구 사상로 ${i+1}",
-              endAddress: "부산시 사상구 사상로 ${i+1}",
-              startTime: "10시 ${i.toString().padLeft(2, '0')}",
-              capacity: i+2,
-              passengersCount: i));
+    if (Singleton().accountIdx != null) {
+      api.getMyLines(Singleton().accountIdx!).then((value) {
+        List<MyLineVO>? list = value?.map((e) {
+          print("e.capacity");
+          print(e.capacity);
+          return MyLineVO(
+              lineIdx: e.lineIdx,
+              driverPhoneNum: e.phone,
+              startAddress: e.address,
+              endAddress: e.destinationAddress,
+              startTime: e.startTime,
+              capacity: e.capacity,
+              passengersCount: e.capacity - e.num);
+        }).toList();
+
+        _myLineList.value = list ?? [];
+      });
     }
-
-    myLineList.addAll(list);
-
+    //myLineList.addAll(list);
   }
 }
