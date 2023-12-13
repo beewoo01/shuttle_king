@@ -1,19 +1,13 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
-import 'package:shuttle_king/common/widget/util/w_default_button.dart';
-import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
-import 'package:shuttle_king/screen/main/map/w_default_map.dart';
-import 'package:shuttle_king/screen/main/tab/search/detail/apply/s_apply_line_join.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/w_map_passanger.dart';
 import 'package:shuttle_king/screen/main/tab/search/detail/vm_line_detail.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'apply/w_line_detail_sliding_panel.dart';
-import 'w_bottom_sheet.dart';
 
 class LineDetailScreen extends StatefulWidget {
   final int lineIdx;
@@ -34,13 +28,12 @@ class _LineDetailScreenState extends State<LineDetailScreen> {
       viewModel = Get.put(LineDetailViewModel());
     }
 
-    viewModel.getLineDetail();
-    viewModel.getBoardingLocation();
+    viewModel.getLineDetail(widget.lineIdx);
+    //viewModel.getBoardingLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = viewModel.model.value;
     return Scaffold(
       backgroundColor: AppColors.defaultBackgroundGreyColor,
       appBar: CustomAppbar().createAppbar(
@@ -49,25 +42,16 @@ class _LineDetailScreenState extends State<LineDetailScreen> {
       }),
       body: Stack(
         children: [
-          DefaultMap(
-            latitude: model.line_destination_latitude,
-            longitude: model.line_destination_longitude,
-            locationModelList: viewModel.boardingLocationList
-                .map((e) => LocationModel(
-                      idx: e.line_location_idx,
-                      position: e.line_location_boarding_number,
-                      latitude: e.line_location_latitude,
-                      longitude: e.line_location_longitude,
-                    ))
-                .toList(),
-          ),
+
+          PassengersMap(lineIdx: widget.lineIdx),
+
           SlidingUpPanel(
             panel: LineDetailSlidingPanel(
               lineIdx: widget.lineIdx,
             ).pSymmetric(h: 20),
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-            maxHeight: 350,
+            maxHeight: 300,
           )
         ],
       ),

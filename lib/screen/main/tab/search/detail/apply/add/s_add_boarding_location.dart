@@ -96,11 +96,7 @@ class _AddBoardingLocationState extends State<AddBoardingLocation> {
                 borderRadius: BorderRadius.circular(30.0)),
             child: NextOrCancelDialogWidget(
                 title: "해당 위치로 노선을\n신설 하시겠습니까?",
-                cancelCallback: () {
-                  Get.back();
-                },
                 confirmCallback: () {
-                  Get.back();
                   Get.off(() => SettingOperation(
                         lineIdx: widget.lineIdx,
                       ));

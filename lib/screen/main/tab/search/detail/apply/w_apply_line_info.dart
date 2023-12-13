@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/widget/w_build_text.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/vm_apply_line.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/vo/vo_line_detail_info.dart';
 
 import '../../../../../../common/common.dart';
 
@@ -8,103 +11,114 @@ class ApplyLineInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        BuildText(
-          title: "출발지",
-          isBold: true,
-        ),
-        height5,
-        BuildText(title: "부산 사상구 사상로 10", size: 16,),
-
-        height20,
-        BuildText(
-          title: "도착지",
-          isBold: true,
-        ),
-        height5,
-        BuildText(title: "부산 사상구 사상로 600번길 600", size: 16),
-
-        height20,
-        BuildText(
-          title: "운행시간",
-          isBold: true,
-        ),
-        height5,
-        BuildText(title: "10시 30분", size: 16),
-        height20,
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    ApplyLineViewModel viewModel = Get.find<ApplyLineViewModel>();
+    return Obx(() {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BuildText(
-                    title: "현재인원",
-                    isBold: true,
-                  ),
-                  height5,
-                  BuildText(title: "6", size: 16),
-                ],
-              ),
+            const BuildText(
+              title: "출발지",
+              isBold: true,
+              size: 15,
             ),
-            width30,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BuildText(
-                    title: "남은자리수",
-                    isBold: true,
-                  ),
-                  height5,
-                  BuildText(title: "10", size: 16),
-                ],
-              ),
-            )
-
-
-          ],
-        ),
-        height20,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BuildText(
-                    title: "운행 주기",
-                    isBold: true,
-                  ),
-                  height5,
-                  BuildText(title: "주 2회 (월, 화)", size: 16),
-                ],
-              ),
+            height5,
+            BuildText(
+              title: viewModel.model?.lineLocationAddress ?? "",
+              size: 16,
             ),
-            width30,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BuildText(
-                    title: "차량종류",
-                    isBold: true,
+            height20,
+            const BuildText(
+              title: "도착지",
+              isBold: true,
+              size: 15,
+            ),
+            height5,
+            BuildText(title: viewModel.model?.lineDestinationAddress ?? "", size: 15),
+            height20,
+            const BuildText(
+              title: "운행시간",
+              isBold: true,
+              size: 15,
+            ),
+            height5,
+            BuildText(title: viewModel.model?.lineLocationStartTime ?? "", size: 15),
+            height20,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BuildText(
+                        title: "현재인원",
+                        isBold: true,
+                        size: 15,
+                      ),
+                      height5,
+                      BuildText(title: "${viewModel.model?.currentPassengerCount ?? ""}", size: 15),
+                    ],
                   ),
-                  height5,
-                  BuildText(title: "버스", size: 16),
-                ],
-              ),
-            )
-
-
+                ),
+                width30,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BuildText(
+                        title: "남은자리수",
+                        isBold: true,
+                        size: 15,
+                      ),
+                      height5,
+                      BuildText(
+                          title:
+                              "${(viewModel.model?.lineCapacity ?? 0) - (viewModel.model?.currentPassengerCount ?? 0)}",
+                          size: 15),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            height20,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BuildText(
+                        title: "운행 주기",
+                        isBold: true,
+                        size: 15,
+                      ),
+                      height5,
+                      BuildText(title: "${viewModel.model?.operationDays}", size: 15),
+                    ],
+                  ),
+                ),
+                width30,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BuildText(
+                        title: "차량종류",
+                        isBold: true,
+                        size: 15,
+                      ),
+                      height5,
+                      BuildText(title: (viewModel.model?.lineCarType) ?? "", size: 15),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ],
-        ),
-      ],
+        );
+      }
     );
   }
 }

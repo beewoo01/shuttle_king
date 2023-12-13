@@ -43,7 +43,7 @@ class SearchLine extends StatelessWidget {
                     onTap: () {
                       print("searchLineList item click");
                       Get.to(LineDetailScreen(
-                        lineIdx: e.line_idx,
+                        lineIdx: e.lineIdx,
                       ));
                     },
                     child: LineItem(e)))

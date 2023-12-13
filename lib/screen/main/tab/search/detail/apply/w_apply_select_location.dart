@@ -21,23 +21,26 @@ class _ApplySelectLocationState extends State<ApplySelectLocation> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ...viewModel.list.mapIndexed((currentValue, index) => GestureDetector(
-              onTap: () {
-                Get.to(SettingOperation(
-                  lineIdx: widget.lineIdx,
-                ));
-                //viewModel.setSelectedPosition(index);
+    return Obx(() {
+        return Column(
+          children: [
+            ...viewModel.list.mapIndexed((currentValue, index) => GestureDetector(
+                  onTap: () {
+                    Get.to(SettingOperation(
+                      lineIdx: widget.lineIdx,
+                    ));
+                    //viewModel.setSelectedPosition(index);
 
-              },
-              child: Obx(() => BoardingLocationItemWidget(
-                    boardingLocation: currentValue,
-                    isSelected: viewModel.selectedPosition == index,
-                    index: viewModel.list.length - 1 == index ? -2 : index,
-                  )),
-            ))
-      ],
+                  },
+                  child: Obx(() => BoardingLocationItemWidget(
+                        boardingLocation: currentValue,
+                        isSelected: viewModel.selectedPosition == index,
+                        index: viewModel.list.length - 1 == index ? -2 : index,
+                      )),
+                ))
+          ],
+        );
+      }
     );
   }
 }

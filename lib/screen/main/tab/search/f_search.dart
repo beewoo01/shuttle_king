@@ -1,6 +1,4 @@
 import 'package:shuttle_king/common/common.dart';
-import 'package:shuttle_king/common/widget/util/d_textfield_inputdecoration.dart';
-import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 import 'package:shuttle_king/screen/main/tab/search/vm_search.dart';
 import 'package:shuttle_king/screen/main/tab/search/w_input_search_info.dart';
 import 'package:shuttle_king/screen/main/tab/search/w_search_list.dart';
@@ -16,12 +14,13 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
 
+  late final SearchViewModel viewModel;
+
   @override
   void initState() {
     super.initState();
     if(!Get.isRegistered<SearchViewModel>()){
-      final vm = Get.put(SearchViewModel());
-      vm.getSearchLineList();
+      viewModel = Get.put(SearchViewModel());
     }
   }
 
@@ -49,7 +48,7 @@ class _SearchState extends State<Search> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InputSearchInfoWidget(callback: (){
-
+                    viewModel.getSearchLineList();
                   },),
                   height20,
                   const SearchListWidget(),

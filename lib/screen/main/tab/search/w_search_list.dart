@@ -17,19 +17,26 @@ class _SearchListWidgetState extends State<SearchListWidget> {
   late final viewModel = Get.find<SearchViewModel>();
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ...viewModel.searchLineList.map((e) => GestureDetector(
-            onTap: () {
-              print("searchLineList item click");
+  void initState() {
+    super.initState();
+    viewModel.getSearchLineList();
+  }
 
-              Get.to(LineDetailScreen(
-                lineIdx: e.line_idx,
-              ));
-            },
-            child: LineItem(e)))
-      ],
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+        return Column(
+          children: [
+            ...viewModel.searchLineList.map((e) => GestureDetector(
+                onTap: () {
+                  Get.to(LineDetailScreen(
+                    lineIdx: e.lineIdx,
+                  ));
+                },
+                child: LineItem(e)))
+          ],
+        );
+      }
     );
   }
 }

@@ -1,89 +1,51 @@
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
-import 'package:shuttle_king/screen/main/tab/search/vo/vo_bording_location.dart';
-import 'package:shuttle_king/screen/main/tab/search/vo/vo_line_detail.dart';
+import 'package:shuttle_king/common/util/vm_base.dart';
+import 'package:shuttle_king/screen/main/tab/home/passenger/vo/vo_marker_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/vo/vo_line_info.dart';
 
-class LineDetailViewModel extends GetxController {
-  //var model = LineDetail(line_idx: 0, line_account_idx: 0, line_capacity: null).obs;
-  late Rx<LineDetail> model;
-  final RxList<BoardingLocation> _boardingLocationList = <BoardingLocation>[].obs;
-  List<BoardingLocation> get boardingLocationList => _boardingLocationList;
+class LineDetailViewModel extends BaseViewModel {
+  late final Rx<LineInfoVO?> _lineInfoVO = Rx<LineInfoVO?>(null);
 
-  void getLineDetail() {
-    model = LineDetail(
-        line_idx: 1,
-        line_account_idx: 2,
-        line_capacity: 10,
-        line_car_type: "봉고",
-        line_price: "3000",
-        line_destination_address: "부산광역시 사상구 사상로 330",
-        line_destination_latitude: 35.1710712,
-        line_destination_longitude: 128.9843348,
-        line_createtime: "2023-11-16 16:07:00").obs;
+  LineInfoVO? get lineInfoVO => _lineInfoVO.value;
+
+  late final RxList<MarkerLocationVO> _markerList = <MarkerLocationVO>[].obs;
+
+  List<MarkerLocationVO> get markerList => _markerList;
+  late NaverMapController mapController;
+  RxDouble initLatitude = 37.3952096.obs;
+  RxDouble initLongitude = 127.1120198.obs;
+
+  void getLineDetail(int lineIdx) {
+    api.getLineInfo(lineIdx).then((value) {
+      _lineInfoVO.value = LineInfoVO(
+          lineList: value.lineList,
+          currentPassenger: value.currentPassenger,
+          operationDays: _setWeekOfDay(value.operationDays ?? ""));
+    });
   }
 
-  void getBoardingLocation() {
-    List<BoardingLocation> list = [
-      BoardingLocation(
-          line_location_idx: 1,
-          line_location_line_idx: 1,
-          line_location_latitude: 35.1730712,
-          line_location_longitude: 128.9843348,
-          line_location_address: '부산광역시 사상구 사상로 330',
-          line_location_start_time: '10:30',
-          line_location_end_time: '11:00',
-          line_location_boarding_number: 1,
-          boarding_count: 1,
-          line_price: 2000),
+  String _setWeekOfDay(String str) {
+    if(str.isEmpty) {
+      return "운행 주기가 설정되지 않았습니다.";
+    }
 
-      BoardingLocation(
-          line_location_idx: 2,
-          line_location_line_idx: 1,
-          line_location_latitude: 35.17473196562537,
-          line_location_longitude: 128.9847820037923,
-          line_location_address: '부산광역시 사상구 사상로 331',
-          line_location_start_time: '10:30',
-          line_location_end_time: '11:00',
-          line_location_boarding_number: 2,
-          boarding_count: 1,
-          line_price: 3000),
+    List<String> daysList = str.split(",");
+    Map<String, String> dayMap = {
+      '1': '월',
+      '2': '화',
+      '3': '수',
+      '4': '목',
+      '5': '금',
+      '6': '토',
+      '7': '일',
+    };
 
-      BoardingLocation(
-          line_location_idx: 3,
-          line_location_line_idx: 1,
-          line_location_latitude: 35.17369353409322,
-          line_location_longitude: 128.9842301042774,
-          line_location_address: '부산광역시 사상구 사상로 332',
-          line_location_start_time: '10:30',
-          line_location_end_time: '11:00',
-          line_location_boarding_number: 3,
-          boarding_count: 2,
-          line_price: 2500),
+    List<String> convertedDays = daysList.map((day) {
+      return dayMap[day] ?? '유효하지 않은 값';
+    }).toList();
 
-      BoardingLocation(
-          line_location_idx: 4,
-          line_location_line_idx: 1,
-          line_location_latitude: 35.173775036196616,
-          line_location_longitude: 128.98346596362472,
-          line_location_address: '부산광역시 사상구 사상로 333',
-          line_location_start_time: '10:30',
-          line_location_end_time: '11:00',
-          line_location_boarding_number: 4,
-          boarding_count: 2,
-          line_price: 3400),
-
-      BoardingLocation(
-          line_location_idx: 5,
-          line_location_line_idx: 1,
-          line_location_latitude: 35.15649907773209,
-          line_location_longitude: 128.9886483409614,
-          line_location_address: '부산광역시 사상구 사상로 334',
-          line_location_start_time: '10:30',
-          line_location_end_time: '11:00',
-          line_location_boarding_number: 99,
-          boarding_count: 2,
-          line_price: 4000),
-    ];
-
-    _boardingLocationList.value = list;
+    return "주 ${convertedDays.length}회 (${convertedDays.join(',')})";
   }
+
 }

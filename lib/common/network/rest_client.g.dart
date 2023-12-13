@@ -229,9 +229,6 @@ class _RestClient implements RestClient {
 
     final result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
-    print("getMyQnA");
-    print("accountIdx $accountIdx");
-    print("result ${result.data}");
     return result.data?.map((e) {
       return ServiceDTO.fromJson(e);
     }).toList();
@@ -268,9 +265,60 @@ class _RestClient implements RestClient {
         path: "getMyLines",
         parameter: {"account_idx": accountIdx});
 
-    final result = await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
 
     return result.data?.map((e) => MyLineDTO.fromJson(e)).toList();
+  }
+
+  @override
+  Future<List<SearchDTO>?> searchLine(
+      String startAddress, String destinationAddress) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "searchLine",
+        parameter: {
+          "startAddress": startAddress,
+          "destinationAddress": destinationAddress
+        });
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    return result.data?.map((e) => SearchDTO.fromJson(e)).toList();
+  }
+
+  @override
+  Future<LineInfoDTO> getLineInfo(int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getLineInfo",
+        parameter: {"line_idx": lineIdx});
+
+    final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
+    return LineInfoDTO.fromJson(result.data);
+  }
+
+  @override
+  Future<LineDetailInfoDTO> getBoardingLocationsOfLineDetail(int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getBoardingLocationsOfLineDetail",
+        parameter: {"line_idx": lineIdx});
+
+    final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
+    return LineDetailInfoDTO.fromJson(result.data);
+  }
+
+  @override
+  Future<List<LineLocationDTO>?> getBoardingLocations(int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getBoardingLocations",
+        parameter: {"line_idx": lineIdx});
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    return result.data?.map((e) => LineLocationDTO.fromJson(e)).toList();
   }
 
 /*

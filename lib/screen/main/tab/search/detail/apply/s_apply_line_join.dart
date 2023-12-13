@@ -31,7 +31,8 @@ class _ApplyLineJoinScreenState extends State<ApplyLineJoinScreen> {
     super.initState();
     if (!Get.isRegistered<ApplyLineViewModel>()) {
       viewModel = Get.put(ApplyLineViewModel());
-      viewModel.getBoardingLocation();
+      viewModel.getBoardingLocationsOfLineDetail(widget.lineIdx);
+      viewModel.getBoardingLocations(widget.lineIdx);
     }
   }
 
@@ -56,8 +57,23 @@ class _ApplyLineJoinScreenState extends State<ApplyLineJoinScreen> {
                   slivers: [
                     SliverToBoxAdapter(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const ApplyLineInfo(),
+                          height20,
+                          const Row(children: [
+                            BuildText(
+                              title: "탑승 위치 선택",
+                              isBold: true,
+                              size: 15,
+                            ),
+                            width5,
+                            BuildText(
+                              title: "(탑승위치를 선택해주세요.)",
+                              size: 10,
+                            )
+                          ],)
+                          ,
                           ApplySelectLocation(
                             lineIdx: widget.lineIdx,
                           )
@@ -73,8 +89,8 @@ class _ApplyLineJoinScreenState extends State<ApplyLineJoinScreen> {
                 callback: () {
                   Get.to(AddBoardingLocation(
                     lineIdx: widget.lineIdx,
-                    latitude: viewModel.list[0].line_location_latitude,
-                    longitude: viewModel.list[0].line_location_longitude,
+                    latitude: viewModel.latitude,
+                    longitude: viewModel.longitude,
                   ));
                 }).pSymmetric(h: 20, v: 10)
           ],

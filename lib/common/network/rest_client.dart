@@ -10,6 +10,10 @@ import 'package:shuttle_king/screen/main/tab/home/passenger/my/dto/dto_my_line.d
 import 'package:shuttle_king/screen/main/tab/news/event/dto_event.dart';
 import 'package:shuttle_king/screen/main/tab/news/notice/dto_notice.dart';
 import 'package:shuttle_king/screen/main/tab/news/service/dto_service.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/dto/dto_line_detail_info.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/dto/dto_line_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/dto/dto_line_info.dart';
+import 'package:shuttle_king/screen/main/tab/search/dto/dto_search.dart';
 
 part 'rest_client.g.dart';
 
@@ -78,4 +82,17 @@ abstract class RestClient {
 
   @GET("getMyLines")
   Future<List<MyLineDTO>?> getMyLines(@Body() int accountIdx);
+
+  @GET("searchLine")
+  Future<List<SearchDTO>?> searchLine(String startAddress, String destinationAddress);
+
+  @GET("getLineInfo")
+  Future<LineInfoDTO> getLineInfo(int lineIdx);
+
+  @GET("getBoardingLocationsOfLineDetail")
+  Future<LineDetailInfoDTO> getBoardingLocationsOfLineDetail(int lineIdx);
+
+  @GET("getBoardingLocations")
+  Future<List<LineLocationDTO>?> getBoardingLocations(int lineIdx);
+
 }

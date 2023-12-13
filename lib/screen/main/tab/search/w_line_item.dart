@@ -4,10 +4,11 @@ import 'package:shuttle_king/screen/main/widget/build_sub_text_line.dart';
 import 'package:shuttle_king/screen/main/widget/w_build_address_location.dart';
 import 'package:flutter/material.dart';
 
+import 'vo/vo_search.dart';
 import 'vo/vo_search_line.dart';
 
 class LineItem extends StatelessWidget {
-  final SearchLineVO line;
+  final SearchVO line;
 
   const LineItem(this.line, {super.key});
 
@@ -23,11 +24,11 @@ class LineItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildText("노선번호 ${line.line_idx.toString().padLeft(2, '0')}",
+              buildText("노선번호 ${line.lineIdx.toString().padLeft(2, '0')}",
                   color: AppColors.mainGreenColor,
                   size: AppSizes.appDefaultTextSize),
               buildText("기사매칭",
-                  color: line.isMatching ? AppColors.mainGreenColor : AppColors
+                  color: line.driverState == 0 ? AppColors.mainGreenColor : AppColors
                       .grey, isBold: false),
             ],
           ),
@@ -37,23 +38,23 @@ class LineItem extends StatelessWidget {
             iconData: Icons.location_on,
             color: Colors.red,
             iconText: "출발",
-            address: line.line_start_address,),
+            address: line.startAddress,),
 
           height5,
           BuildAddressLocationWidget(
             iconData: Icons.location_on,
             color: Colors.blue,
             iconText: "도착",
-            address: line.line_destination_address,),
+            address: line.destinationAddress,),
 
           height20,
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              BuildSubLineText(title: "운행 시작 시간 ", content: ": ${line.start_time}"),
-              BuildSubLineText(title: "현재 인원 ", content: ": ${line.current_passangers_count}"),
-              BuildSubLineText(title: "남은자리수 ", content: ": ${line.line_capacity - line.current_passangers_count}"),
+              BuildSubLineText(title: "운행 시작 시간 ", content: ": ${line.startTime}"),
+              BuildSubLineText(title: "현재 인원 ", content: ": ${line.currentPeople}"),
+              BuildSubLineText(title: "남은자리수 ", content: ": ${line.lineCapacity - line.currentPeople}"),
 
             ],
           )

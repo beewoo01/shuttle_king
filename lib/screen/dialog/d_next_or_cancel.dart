@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
 
 class NextOrCancelDialogWidget extends StatelessWidget {
   final String title;
-  final VoidCallback cancelCallback;
   final VoidCallback confirmCallback;
 
   const NextOrCancelDialogWidget({
     super.key,
     required this.title,
-    required this.cancelCallback,
     required this.confirmCallback,
   });
 
@@ -25,8 +24,13 @@ class NextOrCancelDialogWidget extends StatelessWidget {
         children: [
           Expanded(
               child: Center(
-            child: title.text.size(18).black.center.bold.make(),
-          )),
+                child: title.text
+                    .size(18)
+                    .black
+                    .center
+                    .bold
+                    .make(),
+              )),
           SizedBox(
             width: double.infinity,
             height: 60,
@@ -36,14 +40,19 @@ class NextOrCancelDialogWidget extends StatelessWidget {
                 width10,
                 Expanded(
                     child: DefaultButtonWidget(
-                  title: "취소",
-                  callback: cancelCallback,
-                  backgroundColor: AppColors.deepGreyColor,
-                )),
+                      title: "취소",
+                      callback: () {
+                        Get.back();
+                      },
+                      backgroundColor: AppColors.deepGreyColor,
+                    )),
                 width10,
                 Expanded(
                     child: DefaultButtonWidget(
-                        title: "확인", callback: confirmCallback)),
+                        title: "확인", callback: () {
+                      Get.back();
+                      confirmCallback();
+                    })),
                 width10,
               ],
             ),
