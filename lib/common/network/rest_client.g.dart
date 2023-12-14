@@ -242,6 +242,10 @@ class _RestClient implements RestClient {
         parameter: {"account_idx": accountIdx});
 
     final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
+
+    if (result.data == ""){
+      print("passengerHome result.data == """);
+    }
     return PassengerCurrentLineDTO.fromJson(result.data);
   }
 
@@ -321,18 +325,68 @@ class _RestClient implements RestClient {
     return result.data?.map((e) => LineLocationDTO.fromJson(e)).toList();
   }
 
-/*
-  Future<List<SubCategoryDTO>?> selectSubCategory(int categoryIdx) async {
-    Uri uri = Uri.parse('${BASE_URL}selectSubCategory')
-        .replace(queryParameters: {"category_idx": categoryIdx.toString()});
-    final response = await http.get(uri);
-    if (response.statusCode == 200) {
-      List responseJson = json.decode(response.body);
-      print('selectSubCategory responseJson $responseJson');
-      return responseJson.map((json) => SubCategoryDTO.fromJson(json)).toList();
-    } else {}
+  @override
+  Future<int?> insertLineLocation(LineLocationDTO model, int accountIdx) async {
+    Map<String, dynamic> param = model.toJson();
+    param['accountIdx'] = accountIdx;
+    final option = _createRequestOptionsSync(
+        method: 'POST',
+        path: "insertLineLocation",
+        parameter: param);
 
-    return null;
+    final result = await _dio.fetch<int?>(_setStreamType<int?>(option));
+
+    return result.data;
   }
-*/
+
+  @override
+  Future<LineAndLocationDTO> getLocation(int locationIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getLocation",
+        parameter: {"locationIdx": locationIdx});
+
+    final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
+    return LineAndLocationDTO.fromJson(result.data!);
+    //result.data?.map((e) => ).toList();
+  }
+
+  @override
+  Future<LineAndLocationDTO> getLineInfoForRegisterLocation(int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getLineInfoForRegisterLocation",
+        parameter: {"line_idx": lineIdx});
+
+    final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
+    return LineAndLocationDTO.fromJson(result.data!);
+  }
+
+  @override
+  Future<int> insertLinePassengers(int lineIdx, int accountIdx, int locationIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'POST',
+        path: "insertLinePassengers",
+        parameter: {
+          "line_idx": lineIdx,
+          "account_idx": accountIdx,
+          "location_idx": locationIdx,
+        });
+
+    final result = await _dio.fetch<int>(_setStreamType<int>(option));
+    return result.data!;
+  }
+
+  @override
+  Future<int?> insertNewLine(LineRegistDTO lineRegistDTO) async {
+    Map<String, dynamic> param = lineRegistDTO.toJson();
+    final option = _createRequestOptionsSync(
+        method: 'POST',
+        path: "insertNewLine",
+        parameter: param);
+
+    final result = await _dio.fetch<int>(_setStreamType<int?>(option));
+    return result.data;
+  }
+
 }

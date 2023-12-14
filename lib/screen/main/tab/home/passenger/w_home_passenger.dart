@@ -35,6 +35,7 @@ class _HomePassengerState extends State<HomePassenger> {
 
     if (singleton.accountIdx != null) {
       viewModel.getPassengerLineInfo();
+      viewModel.getLocation();
       //viewModel.getMarkers();
     }
   }
@@ -47,12 +48,15 @@ class _HomePassengerState extends State<HomePassenger> {
         return Stack(
           children: [
             viewModel.getModel == null
-                ? const DefaultMap(
-                    latitude: 37.3952096,
-                    longitude: 127.1120198,
-                    locationModelList: null)
+                ? Obx(() => DefaultMap(
+                    latitude: viewModel.currentLatitude == 37.3952096
+                        ? null
+                        : viewModel.currentLatitude,
+                    longitude: viewModel.currentLongitude == 127.1120198
+                        ? null
+                        : viewModel.currentLongitude,
+                    locationModelList: null))
                 : PassengersMap(lineIdx: viewModel.getModel!.lineIdx),
-
             SlidingUpPanel(
               panel: viewModel.getModel == null
                   ? HomePassengerSearchPanel(

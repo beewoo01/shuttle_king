@@ -87,7 +87,7 @@ class _ApplyLineJoinScreenState extends State<ApplyLineJoinScreen> {
             DefaultButtonWidget(
                 title: "탑승지 추가",
                 callback: () {
-                  Get.to(AddBoardingLocation(
+                  Get.off(AddBoardingLocation(
                     lineIdx: widget.lineIdx,
                     latitude: viewModel.latitude,
                     longitude: viewModel.longitude,

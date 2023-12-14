@@ -70,11 +70,7 @@ class LineDetailSlidingPanel extends StatelessWidget {
   }
 
   List<String> setWeekOfDay(String str) {
-    print("str");
-    print(str);
     List<String> daysList = str.split(",");
-    print("daysList");
-    print(daysList.toString());
     Map<String, String> dayMap = {
       '1': '월',
       '2': '화',
@@ -86,8 +82,6 @@ class LineDetailSlidingPanel extends StatelessWidget {
     };
 
     List<String> convertedDays = daysList.map((day) {
-      print("day");
-      print(day);
       return dayMap[day] ?? '유효하지 않은 값';
     }).toList();
 

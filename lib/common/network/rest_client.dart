@@ -12,6 +12,8 @@ import 'package:shuttle_king/screen/main/tab/news/notice/dto_notice.dart';
 import 'package:shuttle_king/screen/main/tab/news/service/dto_service.dart';
 import 'package:shuttle_king/screen/main/tab/search/detail/apply/dto/dto_line_detail_info.dart';
 import 'package:shuttle_king/screen/main/tab/search/detail/apply/dto/dto_line_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/dto/dto_line_and_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/dto/dto_line_regist.dart';
 import 'package:shuttle_king/screen/main/tab/search/detail/dto/dto_line_info.dart';
 import 'package:shuttle_king/screen/main/tab/search/dto/dto_search.dart';
 
@@ -84,7 +86,8 @@ abstract class RestClient {
   Future<List<MyLineDTO>?> getMyLines(@Body() int accountIdx);
 
   @GET("searchLine")
-  Future<List<SearchDTO>?> searchLine(String startAddress, String destinationAddress);
+  Future<List<SearchDTO>?> searchLine(
+      String startAddress, String destinationAddress);
 
   @GET("getLineInfo")
   Future<LineInfoDTO> getLineInfo(int lineIdx);
@@ -94,5 +97,21 @@ abstract class RestClient {
 
   @GET("getBoardingLocations")
   Future<List<LineLocationDTO>?> getBoardingLocations(int lineIdx);
+
+  @POST("insertLineLocation")
+  Future<int?> insertLineLocation(@Body() LineLocationDTO model, @Body() int accountIdx);
+
+  @GET("getLocation")
+  Future<LineAndLocationDTO> getLocation(int locationIdx);
+
+  @GET("getLineInfoForRegisterLocation")
+  Future<LineAndLocationDTO> getLineInfoForRegisterLocation(int lineIdx);
+
+  @POST("insertLinePassengers")
+  Future<int> insertLinePassengers(int lineIdx, int accountIdx, int locationIdx);
+
+  @POST("insertNewLine")
+  Future<int?> insertNewLine(LineRegistDTO lineRegistDTO);
+
 
 }

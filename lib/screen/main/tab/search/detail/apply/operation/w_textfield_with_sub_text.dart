@@ -6,13 +6,15 @@ import 'package:shuttle_king/common/widget/w_build_text.dart';
 import 'package:shuttle_king/common/widget/w_height_and_width.dart';
 
 class TextFieldWithSubText extends StatelessWidget {
-  const TextFieldWithSubText({super.key,
+  const TextFieldWithSubText({
+    super.key,
     required this.title,
     required this.hint,
     this.hintTextDirection = TextDirection.rtl,
     this.textInputType = TextInputType.text,
     this.obscureText = false,
     this.inputFormatters,
+    this.controller,
   });
 
   final String title;
@@ -21,6 +23,7 @@ class TextFieldWithSubText extends StatelessWidget {
   final TextInputType textInputType;
   final bool obscureText;
   final List<TextInputFormatter>? inputFormatters;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class TextFieldWithSubText extends StatelessWidget {
         ),
         height5,
         TextField(
+          controller: controller,
           keyboardType: textInputType,
           obscureText: obscureText,
           inputFormatters: inputFormatters,

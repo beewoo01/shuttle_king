@@ -1,60 +1,35 @@
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:shuttle_king/common/data/singleton.dart';
 import 'package:shuttle_king/common/util/utils.dart';
-import 'package:shuttle_king/common/util/vm_base.dart';
-import 'package:shuttle_king/screen/main/tab/home/passenger/vo/vo_marker_location.dart';
-import 'package:shuttle_king/screen/main/tab/home/passenger/vo/vo_passenger_current_line.dart';
 
-import '../vo/vo_passenger_line_simple_info.dart';
-
-class HomePassengerViewModel extends BaseViewModel {
-  final Rx<PassengerCurrentLineVO?> _model = Rx<PassengerCurrentLineVO?>(null);
-  PassengerCurrentLineVO? get getModel => _model.value;
-
+class DefaultMapViewModel extends GetxController {
   final Rx<LocationPermission> permissionState = Rx(LocationPermission.denied);
 
   final RxDouble _currentLatitude = 37.3952096.obs;
-  final RxDouble _currentLongitude =  127.1120198.obs;
+  final RxDouble _currentLongitude = 127.1120198.obs;
 
   double get currentLatitude => _currentLatitude.value;
   double get currentLongitude => _currentLongitude.value;
 
-
-
-  void getPassengerLineInfo() {
-    api.passengerHome(Singleton().accountIdx!).then((value) {
-      PassengerCurrentLineVO? model = value == null
-          ? null
-          : PassengerCurrentLineVO(
-              lineIdx: value.line_passengers_line_idx,
-              startTime: value.line_location_start_time,
-              endTime: value.line_location_end_time,
-              latitude: value.line_location_latitude,
-              longitude: value.line_location_longitude,
-              address: value.line_location_address,
-              destinationLatitude: value.line_location_destination_latitude,
-              destinationLongitude: value.line_location_destination_longitude,
-              destinationAddress: value.line_location_destination_address,
-              numOfParticipants: value.numOfParticipants);
-
-      _model.value = model;
-
-      /*if (getModel != null) {
-        getMarkers(getModel!.lineIdx);
-      }*/
-    });
-
-
-
-  }
+  late NaverMapController mapController;
 
   Future getLocationData() async {
+    print("getLocationData");
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
     _currentLatitude.value = position.latitude;
     _currentLongitude.value = position.longitude;
+    print("_currentLatitude.value ");
+    print(_currentLatitude.value);
+
+    print("_currentLongitude.value ");
+    print(_currentLongitude.value);
+
+    mapController.updateCamera(NCameraUpdate.fromCameraPosition(
+        NCameraPosition(
+            target: NLatLng(_currentLatitude.value, _currentLongitude.value),
+            zoom: 15)));
   }
 
   Future<void> getLocation() async {
@@ -87,6 +62,4 @@ class HomePassengerViewModel extends BaseViewModel {
       }
     }
   }
-
-
 }

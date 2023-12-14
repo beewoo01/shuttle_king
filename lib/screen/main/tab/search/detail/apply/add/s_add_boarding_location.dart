@@ -12,11 +12,11 @@ import 'w_boarding_location_map.dart';
 class AddBoardingLocation extends StatefulWidget {
   const AddBoardingLocation(
       {super.key,
-      required this.lineIdx,
+      this.lineIdx,
       required this.latitude,
       required this.longitude});
 
-  final int lineIdx;
+  final int? lineIdx;
   final double latitude;
   final double longitude;
 
@@ -40,7 +40,10 @@ class _AddBoardingLocationState extends State<AddBoardingLocation> {
     return Scaffold(
       backgroundColor: AppColors.defaultBackgroundGreyColor,
       appBar: CustomAppbar().createAppbar(
-          "노선번호 ${widget.lineIdx.toString().padLeft(2, '0')}", () {
+          widget.lineIdx != null
+              ? "노선번호 ${widget.lineIdx.toString().padLeft(2, '0')}"
+              : "노선 신설", () {
+
         Get.back();
       }),
       body: Stack(
@@ -58,7 +61,8 @@ class _AddBoardingLocationState extends State<AddBoardingLocation> {
             right: 15,
             child: FloatingActionButton(
               onPressed: () {
-                if (viewModel.getMarkers().length < 2) {
+                if (viewModel.startAddress.isEmpty ||
+                    viewModel.destinationAddress.isEmpty) {
                   showDialog(
                       context: context,
                       builder: (context) {
@@ -75,6 +79,7 @@ class _AddBoardingLocationState extends State<AddBoardingLocation> {
                       });
                   return;
                 }
+
                 setDialog();
               },
               shape: const CircleBorder(),
@@ -99,6 +104,15 @@ class _AddBoardingLocationState extends State<AddBoardingLocation> {
                 confirmCallback: () {
                   Get.off(() => SettingOperation(
                         lineIdx: widget.lineIdx,
+                        locationState: widget.lineIdx != null ? 1 : 2,
+                        startLatitude: viewModel.startLatitude.value,
+                        startLongitude: viewModel.startLongitude.value,
+                        destinationLatitude:
+                            viewModel.destinationLatitude.value,
+                        destinationLongitude:
+                            viewModel.destinationLongitude.value,
+                        startAddress: viewModel.startAddress.value,
+                        destinationAddress: viewModel.destinationAddress.value,
                       ));
                 }),
           );

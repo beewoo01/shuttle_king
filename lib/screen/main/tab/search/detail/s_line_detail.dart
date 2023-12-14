@@ -51,7 +51,7 @@ class _LineDetailScreenState extends State<LineDetailScreen> {
             ).pSymmetric(h: 20),
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-            maxHeight: 300,
+            maxHeight: 360,
           )
         ],
       ),

@@ -6,7 +6,9 @@ class LineLocationDTO {
   final String line_location_address;
   final double line_location_destination_latitude;
   final double line_location_destination_longitude;
+  final String? line_location_destination_address;
   final String line_location_start_time;
+  final String? line_location_end_time;
   final int line_location_boarding_number;
   final int peopleCount;
 
@@ -18,7 +20,9 @@ class LineLocationDTO {
       required this.line_location_address,
       required this.line_location_destination_latitude,
       required this.line_location_destination_longitude,
+      this.line_location_destination_address,
       required this.line_location_start_time,
+      this.line_location_end_time,
       required this.line_location_boarding_number,
       required this.peopleCount});
 
@@ -37,4 +41,23 @@ class LineLocationDTO {
         line_location_boarding_number: json['line_location_boarding_number'],
         peopleCount: json['peopleCount']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'line_location_idx' : line_location_idx,
+      'line_location_line_idx' : line_location_line_idx,
+      'line_location_latitude' : line_location_latitude,
+      'line_location_longitude' : line_location_longitude,
+      'line_location_address' : line_location_address,
+      'line_location_destination_latitude' : line_location_destination_latitude,
+      'line_location_destination_longitude' : line_location_destination_longitude,
+      'line_location_destination_address' :  line_location_destination_address,
+      'line_location_start_time' : line_location_start_time,
+      'line_location_end_time' :  line_location_end_time,
+      'line_location_boarding_number' : line_location_boarding_number,
+      'peopleCount' : peopleCount,
+    };
+  }
+
+
 }

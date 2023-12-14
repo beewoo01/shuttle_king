@@ -1,15 +1,19 @@
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
+import 'package:shuttle_king/screen/main/tab/search/detail/apply/add/vo/vo_apply_line_location.dart';
 
 class AddBoardingLocationViewModel extends GetxController {
-  RxList<NMarker> markers = <NMarker>[].obs;
 
-  List<NMarker> getMarkers() => markers;
+  final Rx<ApplyLineLocationVO?> applyModel = Rx<ApplyLineLocationVO?>(null);
 
-  void addMarker(NMarker marker) => markers.add(marker);
+  RxDouble
+      startLatitude = 0.0.obs,
+      startLongitude = 0.0.obs,
+      destinationLatitude = 0.0.obs,
+      destinationLongitude = 0.0.obs;
 
-  void removeMarker(NMarker marker) => markers.remove(marker);
+  RxString startAddress = "".obs, destinationAddress = "".obs;
 
-  void removeAtMarker(int position) => markers.removeAt(position);
+
 
 }

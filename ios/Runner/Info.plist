@@ -50,6 +50,10 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NMFClientId</key>
-    <string>7ur5iq5wx6</string>
+	<string>7ur5iq5wx6</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location is required for xyz benefits for you</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is required for xyz benefits for you</string>
 </dict>
 </plist>

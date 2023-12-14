@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/screen/main/tab/search/w_line_item.dart';
 
-import 'detail/apply/s_apply_line_join.dart';
 import 'detail/s_line_detail.dart';
 
 class SearchListWidget extends StatefulWidget {

@@ -21,7 +21,7 @@ class _SettingWeekOfDayWidgetState extends State<SettingWeekOfDayWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ...viewModel.weekOfDayList.map((element) {
-          int currentIndex = viewModel.weekOfDayList.indexOf(element);
+          int currentIndex = viewModel.weekOfDayList.indexOf(element) + 1;
 
           return Obx(
             () {
