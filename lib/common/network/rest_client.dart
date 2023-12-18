@@ -2,25 +2,29 @@ import 'dart:collection';
 import 'dart:ffi';
 
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/dto/dto_driver_line.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/dto/dto_driver_location_marker.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/lines/detail/dto/dto_line_passengers.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/lines/dto/dto_driver_lines.dart';
 import 'package:shuttle_king/screen/main/tab/home/passenger/dto/dto_marker_location.dart';
 import 'package:shuttle_king/screen/main/tab/home/passenger/dto/dto_passenger_current_line.dart';
 import 'package:shuttle_king/screen/main/tab/home/passenger/my/dto/dto_my_line.dart';
 import 'package:shuttle_king/screen/main/tab/news/event/dto_event.dart';
 import 'package:shuttle_king/screen/main/tab/news/notice/dto_notice.dart';
 import 'package:shuttle_king/screen/main/tab/news/service/dto_service.dart';
-import 'package:shuttle_king/screen/main/tab/search/detail/apply/dto/dto_line_detail_info.dart';
-import 'package:shuttle_king/screen/main/tab/search/detail/apply/dto/dto_line_location.dart';
-import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/dto/dto_line_and_location.dart';
-import 'package:shuttle_king/screen/main/tab/search/detail/apply/operation/dto/dto_line_regist.dart';
-import 'package:shuttle_king/screen/main/tab/search/detail/dto/dto_line_info.dart';
 import 'package:shuttle_king/screen/main/tab/search/dto/dto_search.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/detail/apply/dto/dto_line_detail_info.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/detail/apply/dto/dto_line_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/detail/apply/operation/dto/dto_line_and_location.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/detail/apply/operation/dto/dto_line_regist.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/detail/dto/dto_line_info.dart';
 
 part 'rest_client.g.dart';
 
-@RestApi(baseUrl: 'http://192.168.0.140:8080/project/')
-// @RestApi(baseUrl: 'http://192.168.35.253:8080/project/')
+@RestApi(baseUrl: 'http://codebrosdev.cafe24.com:8080/shuttle_king/')
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
@@ -99,7 +103,8 @@ abstract class RestClient {
   Future<List<LineLocationDTO>?> getBoardingLocations(int lineIdx);
 
   @POST("insertLineLocation")
-  Future<int?> insertLineLocation(@Body() LineLocationDTO model, @Body() int accountIdx);
+  Future<int?> insertLineLocation(
+      @Body() LineLocationDTO model, @Body() int accountIdx);
 
   @GET("getLocation")
   Future<LineAndLocationDTO> getLocation(int locationIdx);
@@ -108,10 +113,38 @@ abstract class RestClient {
   Future<LineAndLocationDTO> getLineInfoForRegisterLocation(int lineIdx);
 
   @POST("insertLinePassengers")
-  Future<int> insertLinePassengers(int lineIdx, int accountIdx, int locationIdx);
+  Future<int> insertLinePassengers(
+      int lineIdx, int accountIdx, int locationIdx);
 
   @POST("insertNewLine")
   Future<int?> insertNewLine(LineRegistDTO lineRegistDTO);
 
+  @POST("updateMyInfo")
+  Future<int?> updateMyInfo(int accountIdx, String accountEmail,
+      String accountPassword, String accountPhone);
 
+  @GET("getCurrentDriverLine")
+  Future<DriverLineDTO?> getCurrentDriverLine(int accountIdx);
+
+  @GET("getDriverLocations")
+  Future<List<DriverLocationMarkerDTO>?> getDriverLocations(int lineIdx);
+
+  @GET("getDriverLineList")
+  Future<List<DriverLinesDTO>?> getDriverLineList(int accountIdx);
+
+  @GET("getPassengerList")
+  Future<List<LinePassengersDTO>?> getPassengerList(int lineIdx);
+
+  @POST("applyLineStopDriver")
+  Future<int?> applyLineStopDriver(
+      @Body() int accountIdx,
+      @Body() int lineIdx,
+      @Body()String reason);
+
+
+  @GET("searchDriverLine")
+  Future<List<SearchDTO>?> searchDriverLine(String search);
+
+  @POST("registerDriverLine")
+  Future<int?> registerDriverLine(int accountIdx, int lineIdx);
 }

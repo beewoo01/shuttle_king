@@ -24,11 +24,14 @@ class PassengerDetail extends StatelessWidget {
         Get.back();
       }),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...viewModel.passengers
-                .map((e) => PassengerDetailListItem(passenger: e).pSymmetric(h: 19, v: 10))
-          ],
+        child: Obx(() {
+            return Column(
+              children: [
+                ...viewModel.passengers
+                    .map((e) => PassengerDetailListItem(passenger: e).pSymmetric(h: 19, v: 10))
+              ],
+            );
+          }
         ),
       ),
     );

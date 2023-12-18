@@ -32,13 +32,20 @@ class PassengersList extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () {
-                  Get.to(PassengerDetail(lineIdx: lineIdx,));
+                  Get.to(PassengerDetail(
+                    lineIdx: lineIdx,
+                  ));
                 },
                 child: "상세보기".text.color(AppColors.darkGrey).underline.make()),
           ],
         ),
-        ...viewModel.passengers
-            .map((element) => PassengersListItem(passenger: element))
+
+        Obx(() => Column(
+              children: [
+                ...viewModel.passengers
+                    .map((element) => PassengersListItem(passenger: element))
+              ],
+            ))
       ],
     );
   }

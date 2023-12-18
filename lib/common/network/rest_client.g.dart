@@ -5,10 +5,7 @@ class _RestClient implements RestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    //baseUrl ??= 'http://192.168.0.137:8080/project';
-    //baseUrl ??= 'http://codebrosdev.cafe24.com:8080/motocycle';
-    baseUrl ??= 'http://192.168.0.140:8080/project/';
-    // baseUrl ??= 'http://192.168.35.253:8080/project/';
+    baseUrl ??= 'http://codebrosdev.cafe24.com:8080/shuttle_king/';
   }
 
   final Dio _dio;
@@ -229,6 +226,8 @@ class _RestClient implements RestClient {
 
     final result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    print("getMyQnA");
+    print(result.data);
     return result.data?.map((e) {
       return ServiceDTO.fromJson(e);
     }).toList();
@@ -243,10 +242,11 @@ class _RestClient implements RestClient {
 
     final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
 
-    if (result.data == ""){
-      print("passengerHome result.data == """);
+    if (result.data == "") {
+      return null;
+    } else {
+      return PassengerCurrentLineDTO.fromJson(result.data);
     }
-    return PassengerCurrentLineDTO.fromJson(result.data);
   }
 
   @override
@@ -294,16 +294,15 @@ class _RestClient implements RestClient {
   @override
   Future<LineInfoDTO> getLineInfo(int lineIdx) async {
     final option = _createRequestOptionsSync(
-        method: 'GET',
-        path: "getLineInfo",
-        parameter: {"line_idx": lineIdx});
+        method: 'GET', path: "getLineInfo", parameter: {"line_idx": lineIdx});
 
     final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
     return LineInfoDTO.fromJson(result.data);
   }
 
   @override
-  Future<LineDetailInfoDTO> getBoardingLocationsOfLineDetail(int lineIdx) async {
+  Future<LineDetailInfoDTO> getBoardingLocationsOfLineDetail(
+      int lineIdx) async {
     final option = _createRequestOptionsSync(
         method: 'GET',
         path: "getBoardingLocationsOfLineDetail",
@@ -330,9 +329,7 @@ class _RestClient implements RestClient {
     Map<String, dynamic> param = model.toJson();
     param['accountIdx'] = accountIdx;
     final option = _createRequestOptionsSync(
-        method: 'POST',
-        path: "insertLineLocation",
-        parameter: param);
+        method: 'POST', path: "insertLineLocation", parameter: param);
 
     final result = await _dio.fetch<int?>(_setStreamType<int?>(option));
 
@@ -363,7 +360,8 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<int> insertLinePassengers(int lineIdx, int accountIdx, int locationIdx) async {
+  Future<int> insertLinePassengers(
+      int lineIdx, int accountIdx, int locationIdx) async {
     final option = _createRequestOptionsSync(
         method: 'POST',
         path: "insertLinePassengers",
@@ -381,12 +379,138 @@ class _RestClient implements RestClient {
   Future<int?> insertNewLine(LineRegistDTO lineRegistDTO) async {
     Map<String, dynamic> param = lineRegistDTO.toJson();
     final option = _createRequestOptionsSync(
-        method: 'POST',
-        path: "insertNewLine",
-        parameter: param);
+        method: 'POST', path: "insertNewLine", parameter: param);
 
     final result = await _dio.fetch<int>(_setStreamType<int?>(option));
     return result.data;
   }
 
+  @override
+  Future<int?> updateMyInfo(int accountIdx, String accountEmail,
+      String accountPassword, String accountPhone) async {
+    Map<String, dynamic> param = {
+      "account_idx": accountIdx,
+      "account_email": accountEmail,
+      "account_password": accountPassword,
+      "account_phone": accountPhone,
+    };
+
+    final option = _createRequestOptionsSync(
+        method: 'POST', path: "updateMyInfo", parameter: param);
+
+    final result = await _dio.fetch<int>(_setStreamType<int?>(option));
+    return result.data;
+  }
+
+  @override
+  Future<DriverLineDTO?> getCurrentDriverLine(int accountIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getCurrentDriverLine",
+        parameter: {"accountIdx": accountIdx});
+
+    final result = await _dio.fetch<dynamic>(_setStreamType<dynamic>(option));
+    print("getCurrentDriverLine");
+    print(result.data);
+    if (result.data == null || result.data.toString().isEmpty) {
+      return null;
+    } else {
+      return DriverLineDTO.fromJson(result.data);
+    }
+  }
+
+  @override
+  Future<List<DriverLocationMarkerDTO>?> getDriverLocations(int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getDriverLocations",
+        parameter: {"lineIdx": lineIdx});
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    print("getDriverLocations");
+    print(result.data);
+    return result.data?.map((e) {
+      return DriverLocationMarkerDTO.fromJson(e);
+    }).toList();
+
+    //DriverLocationMarkerDTO.fromJson(result.data!);
+  }
+
+  @override
+  Future<List<DriverLinesDTO>?> getDriverLineList(int accountIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getDriverLineList",
+        parameter: {"accountIdx": accountIdx});
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    print("getDriverLineList");
+    print(result.data);
+    return result.data?.map((e) {
+      return DriverLinesDTO.fromJson(e);
+    }).toList();
+  }
+
+  @override
+  Future<List<LinePassengersDTO>?> getPassengerList(int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "getPassengerList",
+        parameter: {"lineIdx": lineIdx});
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    print("getPassengerList");
+    print(result.data);
+    return result.data?.map((e) {
+      return LinePassengersDTO.fromJson(e);
+    }).toList();
+  }
+
+  @override
+  Future<int?> applyLineStopDriver(
+      int accountIdx, int lineIdx, String reason) async {
+    final option = _createRequestOptionsSync(
+        method: 'POST',
+        path: "applyLineStopDriver",
+        parameter: {
+          "accountIdx": accountIdx,
+          "lineIdx": lineIdx,
+          "reason": reason
+        });
+
+    final result = await _dio.fetch<int?>(_setStreamType<int?>(option));
+    print("getPassengerList");
+    print(result.data);
+    return result.data;
+  }
+
+  @override
+  Future<List<SearchDTO>?> searchDriverLine(String search) async {
+    final option = _createRequestOptionsSync(
+        method: 'GET',
+        path: "searchDriverLine",
+        parameter: {
+          "search": search,
+        });
+
+    final result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<dynamic>>(option));
+    return result.data?.map((e) => SearchDTO.fromJson(e)).toList();
+  }
+
+  @override
+  Future<int?> registerDriverLine(int accountIdx, int lineIdx) async {
+    final option = _createRequestOptionsSync(
+        method: 'POST',
+        path: "registerDriverLine",
+        parameter: {"accountIdx": accountIdx, "lineIdx": lineIdx});
+
+    final result = await _dio.fetch<int?>(_setStreamType<int?>(option));
+    print("registerDriverLine");
+    print(result.data);
+    return result.data;
+  }
 }

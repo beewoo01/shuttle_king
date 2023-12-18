@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
+import 'package:shuttle_king/common/data/singleton.dart';
 import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
 import 'package:shuttle_king/screen/main/map/w_default_map.dart';
 import 'package:shuttle_king/screen/main/tab/home/diver/lines/s_my_lines.dart';
 import 'package:shuttle_king/screen/main/tab/home/diver/vm_home_driver.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/w_home_driver_map.dart';
 import 'package:shuttle_king/screen/main/tab/home/w_home_line_guide.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -22,8 +24,7 @@ class _HomeDriverState extends State<HomeDriver> {
   void initState() {
     super.initState();
     if (!Get.isRegistered<DriverHomeViewModel>()) {
-      viewModel.getLineDetail();
-      viewModel.getBoardingLocation();
+      viewModel.getCurrentDriverLine(Singleton().accountIdx!);
     }
   }
 
@@ -33,18 +34,7 @@ class _HomeDriverState extends State<HomeDriver> {
       color: AppColors.defaultBackgroundGreyColor,
       child: Stack(
         children: [
-          DefaultMap(
-            latitude: viewModel.model.line_destination_latitude,
-            longitude: viewModel.model.line_destination_longitude,
-            locationModelList: viewModel.boardingLocationList
-                .map((e) => LocationModel(
-              idx: e.line_location_idx,
-              position: e.line_location_boarding_number,
-              latitude: e.line_location_latitude,
-              longitude: e.line_location_longitude,
-            ))
-                .toList(),
-          ),
+          const HomeDriverMap(),
           SlidingUpPanel(
             panel: const HomeLineGuide().pSymmetric(h: 20),
             borderRadius: const BorderRadius.only(

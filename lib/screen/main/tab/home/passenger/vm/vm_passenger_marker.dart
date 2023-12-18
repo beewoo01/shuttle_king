@@ -1,6 +1,8 @@
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/constants.dart';
+import 'package:shuttle_king/common/util/utils.dart';
 import 'package:shuttle_king/common/util/vm_base.dart';
 import 'package:shuttle_king/screen/main/tab/home/passenger/vo/vo_marker_location.dart';
 
@@ -9,20 +11,16 @@ class PassengerMarkerViewModel extends BaseViewModel {
 
   List<MarkerLocationVO> get markerList => _markerList;
   late NaverMapController mapController;
-  RxDouble initLatitude = 37.3952096.obs;
-  RxDouble initLongitude = 127.1120198.obs;
+
+  final Rx<LocationPermission> permissionState = Rx(LocationPermission.denied);
+
+  final RxDouble _currentLatitude = 37.3952096.obs;
+  final RxDouble _currentLongitude =  127.1120198.obs;
+
+  double get currentLatitude => _currentLatitude.value;
+  double get currentLongitude => _currentLongitude.value;
 
   void getMarkers(int lineIdx) {
-    /*api.getNotice().then((value) {
-      List<NoticeVO>? list = value
-          ?.map((e) => NoticeVO(e.noticeIdx, e.noticeTitle, e.noticeDescription,
-          imgUrl: e.noticeImgUrl, noticeCreateTime: e.noticeCreateTime))
-          .toList();
-
-      _noticeList.value = list ?? [];
-    });*/
-
-
     api.getMarkers(lineIdx).then((value) {
       List<MarkerLocationVO>? list = value?.map((e) {
         return MarkerLocationVO(
@@ -38,11 +36,11 @@ class PassengerMarkerViewModel extends BaseViewModel {
       _markerList.value = list ?? [];
 
       if (list != null && list.isNotEmpty) {
-        initLatitude.value = list[0].locationLatitude;
-        initLongitude.value = list[0].locationLongitude;
+        _currentLatitude.value = list[0].locationLatitude;
+        _currentLongitude.value = list[0].locationLongitude;
         mapController.updateCamera(NCameraUpdate.fromCameraPosition(
             NCameraPosition(
-                target: NLatLng(initLatitude.value, initLongitude.value),
+                target: NLatLng(_currentLatitude.value, _currentLongitude.value),
                 zoom: 15)));
 
         setMapMarkers();
@@ -50,6 +48,50 @@ class PassengerMarkerViewModel extends BaseViewModel {
 
 
     });
+  }
+
+  Future getLocationData() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+
+    _currentLatitude.value = position.latitude;
+    _currentLongitude.value = position.longitude;
+
+    mapController.updateCamera(NCameraUpdate.fromCameraPosition(
+        NCameraPosition(
+            target: NLatLng(_currentLatitude.value, _currentLongitude.value),
+            zoom: 15)));
+  }
+
+  Future<void> getLocation() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+    permissionState.value = permission;
+    switch(permissionState.value) {
+
+      case LocationPermission.denied: {
+        Utils.snackBar("위치권한이 필요합니다.", "위치권한을 허용해주세요.");
+        //getLocation();
+        break;
+      }
+      case LocationPermission.deniedForever: {
+        Utils.snackBar("위치권한이 필요합니다.", "위치권한을 허용해주세요.");
+        //getLocation();
+        break;
+      }
+      case LocationPermission.whileInUse: {
+        getLocationData();
+        break;
+      }
+      case LocationPermission.always: {
+        getLocationData();
+        break;
+      }
+      case LocationPermission.unableToDetermine: {
+        Utils.snackBar("위치권한이 필요합니다.", "위치권한을 허용해주세요.");
+        //getLocation();
+        break;
+      }
+    }
   }
 
 

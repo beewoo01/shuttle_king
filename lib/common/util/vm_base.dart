@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+export 'package:get/get.dart';
 import 'package:shuttle_king/common/network/rest_client.dart';
 
 class BaseViewModel extends GetxController {

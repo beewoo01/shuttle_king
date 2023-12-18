@@ -17,9 +17,6 @@ class Notice extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Obx(() {
-        print("Notice Obx");
-        print(viewModel.noticeList.length);
-        print(viewModel.noticeList);
           return Column(
             children: [
               ...viewModel.noticeList.map((e) {

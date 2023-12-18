@@ -12,13 +12,11 @@ class LoginViewModel extends BaseViewModel {
   void login() {
     String id = idController.text;
     String pw = pwController.text;
-    /*if (id.isEmpty || pw.isEmpty) {
-      Utils.snackBar("로그인에 실패했습니다.", "아이디와 비밀번호를 확인해 주세요.");
-      return;
-    }*/
 
-    id = "test1";
-    pw = "1234";
+    if(id.isEmpty || pw.isEmpty) {
+      Utils.snackBar("로그인에 실패했습니다.", "아이디 또는 비밀번호를 정확히 입력해주세요.");
+      return;
+    }
 
     api.login(id, pw).then((value) {
       int result = value['result'];

@@ -15,17 +15,17 @@ class MyLines extends StatefulWidget {
 }
 
 class _MyLinesState extends State<MyLines> {
-
   late final MyLinesViewModel viewModel;
 
   @override
   void initState() {
     super.initState();
-    if(!Get.isRegistered<MyLinesViewModel>()) {
+    if (!Get.isRegistered<MyLinesViewModel>()) {
       viewModel = Get.put(MyLinesViewModel());
     }
     viewModel.getMyLines();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,16 +34,19 @@ class _MyLinesState extends State<MyLines> {
         Get.back();
       }),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...viewModel.myLines.map((e) => GestureDetector(onTap: (){
-              Get.to(LinePassengersDetail(line: e));
-            },child: MyLinesItem(line: e)))
-          ],
-        ).pSymmetric(h: 29),
+        child: Obx(() {
+            return Column(
+              children: [
+                ...viewModel.myLines.map((e) => GestureDetector(
+                    onTap: () {
+                      Get.to(LinePassengersDetail(line: e));
+                    },
+                    child: MyLinesItem(line: e)))
+              ],
+            ).pSymmetric(h: 29);
+          }
+        ),
       ),
     );
-
   }
-
 }

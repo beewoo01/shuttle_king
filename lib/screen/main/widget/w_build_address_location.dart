@@ -28,7 +28,7 @@ class BuildAddressLocationWidget extends StatelessWidget {
           ],
         ),
         width10,
-        address.text.color(Colors.black).size(15).make()
+        Expanded(child: address.text.color(Colors.black).overflow(TextOverflow.fade).size(15).make())
       ],
     );
   }

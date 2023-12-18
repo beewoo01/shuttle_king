@@ -1,26 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shuttle_king/common/util/vm_base.dart';
 
-import 'package:shuttle_king/screen/main/tab/search/vo/dummy_search_lines.dart';
-import 'package:shuttle_king/screen/main/tab/search/vo/vo_search.dart';
-import 'package:shuttle_king/screen/main/tab/search/vo/vo_search_line.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/vo/dummy_search_lines.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/vo/vo_search.dart';
+import 'package:shuttle_king/screen/main/tab/search/passenger/vo/vo_search_line.dart';
 
 
 class SearchLineViewModel extends BaseViewModel {
   final RxList<SearchVO> _searchLineList = <SearchVO>[].obs;
 
   List<SearchVO> get searchLineList => _searchLineList;
-  final RxString _startAddress = "".obs;
-  final RxString _destinationAddress = "".obs;
 
-  void setStartAddress(String startAddress) =>
-      _startAddress.value = startAddress;
-
-  void setDestinationAddress(String destinationAddress) =>
-      _destinationAddress.value = destinationAddress;
+  TextEditingController startController = TextEditingController();
+  TextEditingController destinationController = TextEditingController();
 
   void getSearchLineList() {
-    api.searchLine(_startAddress.value, _destinationAddress.value).then((value) {
+    print("getSearchLineList");
+    api.searchLine(startController.text, destinationController.text).then((value) {
       List<SearchVO>? list = value?.map((e) {
         return SearchVO(
             lineIdx: e.line_idx,
@@ -35,4 +32,5 @@ class SearchLineViewModel extends BaseViewModel {
       _searchLineList.value = list ?? [];
     });
   }
+
 }

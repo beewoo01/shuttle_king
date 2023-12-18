@@ -15,10 +15,11 @@ class HomeLineGuide extends StatelessWidget {
         height30,
         "노선안내".text.size(18).bold.make(),
         height30,
-        "별관(출발지) - 사상로 01 - 사송로 02 - 사상로 03 - 사상로 04(도착지)"
-            .text
-            .color(AppColors.grey)
-            .make()
+        Obx(() {
+          return viewModel.currentDriveLineStr.value.text
+              .color(AppColors.grey)
+              .make();
+        }),
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/common/widget/util/a_app_bar.dart';
 import 'package:shuttle_king/common/widget/util/w_default_button.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/lines/dto/dto_driver_lines.dart';
 
 import '../vo/vo_my_line.dart';
 import 'stop/s_operation_stop_apply.dart';
@@ -13,7 +14,8 @@ import 'w_passengers_list.dart';
 class LinePassengersDetail extends StatefulWidget {
   const LinePassengersDetail({super.key, required this.line});
 
-  final MyLineVO line;
+  //final MyLineVO line;
+  final DriverLinesDTO line;
 
   @override
   State<LinePassengersDetail> createState() => _LinePassengersDetailState();

@@ -13,7 +13,7 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomeFragmentState extends State<HomeFragment> {
-  late DriverHomeViewModel viewModel = Get.put(DriverHomeViewModel());
+  //late DriverHomeViewModel viewModel = Get.put(DriverHomeViewModel());
   int _uniqueHeroTagIndex = 0;
 
   Singleton singleton = Singleton();
@@ -21,10 +21,10 @@ class _HomeFragmentState extends State<HomeFragment> {
   @override
   void initState() {
     super.initState();
-    if (!Get.isRegistered<DriverHomeViewModel>()) {
+    /*if (!Get.isRegistered<DriverHomeViewModel>()) {
       viewModel.getLineDetail();
       viewModel.getBoardingLocation();
-    }
+    }*/
   }
 
   @override

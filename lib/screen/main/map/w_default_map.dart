@@ -5,7 +5,6 @@ import 'package:shuttle_king/common/common.dart';
 import 'package:shuttle_king/screen/main/map/vm_default_map.dart';
 import 'package:shuttle_king/screen/main/map/vo_location_model.dart';
 
-import '../tab/search/detail/vm_line_detail.dart';
 
 class DefaultMap extends StatefulWidget {
   const DefaultMap(

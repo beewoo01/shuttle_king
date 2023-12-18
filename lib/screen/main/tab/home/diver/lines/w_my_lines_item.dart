@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shuttle_king/screen/main/tab/home/diver/lines/dto/dto_driver_lines.dart';
 import 'package:shuttle_king/screen/main/widget/build_sub_text_line.dart';
 import 'package:shuttle_king/screen/main/widget/w_build_address_location.dart';
 
@@ -8,7 +9,8 @@ import 'vo/vo_my_line.dart';
 class MyLinesItem extends StatelessWidget {
   const MyLinesItem({super.key, required this.line});
 
-  final MyLineVO line;
+  //final MyLineVO line;
+  final DriverLinesDTO line;
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +31,25 @@ class MyLinesItem extends StatelessWidget {
             iconData: Icons.location_on,
             color: Colors.red,
             iconText: "출발",
-            address: line.line_start_address,
+            address: line.line_location_address,
           ),
           height5,
           BuildAddressLocationWidget(
             iconData: Icons.location_on,
             color: Colors.blue,
             iconText: "도착",
-            address: line.line_destination_address,
+            address: line.line_location_destination_address,
           ),
           height20,
           Row(
             children: [
               BuildSubLineText(
-                  title: "운행 시작 시간 ", content: ": ${line.start_time}"),
+                  title: "운행 시작 시간 ", content: ": ${line.line_location_start_time}"),
               width30,
               BuildSubLineText(
                   title: "남은자리수 ",
                   content:
-                  ": ${line.line_capacity - line.current_passangers_count}"),
+                  ": ${line.line_capacity - line.numOfcurrent}"),
             ],
           )
         ],

@@ -14,21 +14,24 @@ class Service extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Obx(() {
-        return Column(
-          children: [
-            ...viewModel.serviceList
-                .mapIndexed((element, index) => Obx(() => ServiceItem(
-                      model: element,
-                      isClicked: viewModel.selectedItem.value == index,
-                      callback: () {
-                        if (viewModel.selectedItem.value == index) {
-                          viewModel.selectedItem.value = -1;
-                          return;
-                        }
-                        viewModel.selectedItem.value = index;
-                      },
-                    )))
-          ],
+        return SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              ...viewModel.serviceList
+                  .mapIndexed((element, index) => Obx(() => ServiceItem(
+                        model: element,
+                        isClicked: viewModel.selectedItem.value == index,
+                        callback: () {
+                          if (viewModel.selectedItem.value == index) {
+                            viewModel.selectedItem.value = -1;
+                            return;
+                          }
+                          viewModel.selectedItem.value = index;
+                        },
+                      )))
+            ],
+          ),
         );
       }),
     );

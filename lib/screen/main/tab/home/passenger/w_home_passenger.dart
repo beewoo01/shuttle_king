@@ -47,7 +47,8 @@ class _HomePassengerState extends State<HomePassenger> {
       child: Obx(() {
         return Stack(
           children: [
-            viewModel.getModel == null
+            Obx(() => PassengersMap(lineIdx: viewModel.getModel?.lineIdx))
+            /*viewModel.getModel == null
                 ? Obx(() => DefaultMap(
                     latitude: viewModel.currentLatitude == 37.3952096
                         ? null
@@ -56,7 +57,7 @@ class _HomePassengerState extends State<HomePassenger> {
                         ? null
                         : viewModel.currentLongitude,
                     locationModelList: null))
-                : PassengersMap(lineIdx: viewModel.getModel!.lineIdx),
+                : PassengersMap(lineIdx: viewModel.getModel!.lineIdx)*/,
             SlidingUpPanel(
               panel: viewModel.getModel == null
                   ? HomePassengerSearchPanel(
